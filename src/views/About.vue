@@ -1,6 +1,9 @@
 <template>
-  <div id="about">
+  <div id="about" class="pa-4 pl-16">
     <NavigationDrawer />
+    <div>
+      HelloWorld HelloWorld HelloWorld HelloWorld
+    </div>
   </div>
 </template>
 
@@ -14,5 +17,6 @@ export default {
 
 <style lang="sass" scoped>
 #about
+  position: relative
   height: 100%
 </style>
