@@ -11,7 +11,7 @@
         </v-list-item-avatar>
       </v-list-item>
       <!-- 登入者資料 -->
-      <v-list-item link>
+      <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="text-h6">
             {{ username }}
@@ -25,33 +25,13 @@
       nav
       dense
     >
-      <!-- 店家設定 -->
-      <v-list-item link>
+      <!-- 店家設定/員工編制/選擇班別/查看班表 -->
+      <v-list-item link v-for="feature in features" :key="feature.id"
+        @click="selectListItem(feature.label)">
         <v-list-item-icon>
-          <v-icon>mdi-store</v-icon>
+          <v-icon>{{ feature.icon }}</v-icon>
         </v-list-item-icon>
-        <v-list-item-title>{{ storeSetting }}</v-list-item-title>
-      </v-list-item>
-      <!-- 員工編制 -->
-      <v-list-item link>
-        <v-list-item-icon>
-          <v-icon>mdi-account-multiple</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title>{{ staffSetting }}</v-list-item-title>
-      </v-list-item>
-      <!-- 選擇班別 -->
-      <v-list-item link>
-        <v-list-item-icon>
-          <v-icon>mdi-file-document-edit</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title>{{ scheduleSetting }}</v-list-item-title>
-      </v-list-item>
-      <!-- 查看班表 -->
-      <v-list-item link>
-        <v-list-item-icon>
-          <v-icon>mdi-calendar-check</v-icon>
-        </v-list-item-icon>
-        <v-list-item-title>{{ viewArrangement }}</v-list-item-title>
+        <v-list-item-title>{{ feature.label }}</v-list-item-title>
       </v-list-item>
     </v-list>
   </v-navigation-drawer>
@@ -64,11 +44,26 @@ export default {
     username: 'Sandra Adams',
     userEmail: 'sandra_a88@gmail.com',
     userAvatar: 'https://randomuser.me/api/portraits/women/85.jpg',
-    storeSetting: '店家設定',
-    staffSetting: '員工編制',
-    scheduleSetting: '選擇班別',
-    viewArrangement: '查看班表',
+    features: [
+      {
+        id: 'storeSetting', label: '店家設定', icon: 'mdi-store',
+      },
+      {
+        id: 'staffSetting', label: '員工編制', icon: 'mdi-account-multiple',
+      },
+      {
+        id: 'scheduleSetting', label: '選擇班別', icon: 'mdi-file-document-edit',
+      },
+      {
+        id: 'viewArrangement', label: '查看班表', icon: 'mdi-calendar-check',
+      },
+    ],
   }),
+  methods: {
+    selectListItem(selectItem) {
+      console.log(selectItem);
+    },
+  },
 };
 </script>
 
