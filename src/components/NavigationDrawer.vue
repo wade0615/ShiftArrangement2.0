@@ -26,7 +26,9 @@
       dense
     >
       <!-- 店家設定/員工編制/選擇班別/查看班表 -->
-      <v-list-item link v-for="feature in features" :key="feature.id"
+      <v-list-item
+        v-for="feature in features" :key="feature.id"
+        :to="{name: feature.id}"
         @click="selectListItem(feature.label)">
         <v-list-item-icon>
           <v-icon>{{ feature.icon }}</v-icon>

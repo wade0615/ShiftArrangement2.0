@@ -1,20 +1,18 @@
 <template>
-  <div id="about" class="pa-4 pl-16">
-    <NavigationDrawer />
-    <router-view name="features" />
+  <div id="staff-setting" class="pa-4 pl-16">
+    staff-setting
   </div>
 </template>
 
 <script>
 export default {
-  name: 'about',
+  name: 'StaffSetting',
   data: () => ({
   }),
 };
 </script>
 
 <style lang="sass" scoped>
-#about
+#staff-setting
   position: relative
-  height: 100%
 </style>

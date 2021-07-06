@@ -1,20 +1,18 @@
 <template>
-  <div id="about" class="pa-4 pl-16">
-    <NavigationDrawer />
-    <router-view name="features" />
+  <div id="schedule-setting" class="pa-4 pl-16">
+    schedule-setting
   </div>
 </template>
 
 <script>
 export default {
-  name: 'about',
+  name: 'ScheduleSetting',
   data: () => ({
   }),
 };
 </script>
 
 <style lang="sass" scoped>
-#about
+#schedule-setting
   position: relative
-  height: 100%
 </style>

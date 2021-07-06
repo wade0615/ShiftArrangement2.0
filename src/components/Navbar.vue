@@ -28,7 +28,7 @@
 
     <v-spacer></v-spacer>
 
-    <router-link :to="{name: 'About'}">
+    <router-link :to="{name: 'about'}">
       <span class="mr-2 white--text">To about</span>
       <v-icon>mdi-open-in-new</v-icon>
     </router-link>
