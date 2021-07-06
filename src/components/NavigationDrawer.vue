@@ -1,5 +1,6 @@
 <template>
   <v-navigation-drawer
+    id="navigation-drawer"
     absolute
     permanent
     expand-on-hover
@@ -71,5 +72,6 @@ export default {
 
 <style lang="sass" scoped>
 #navigation-drawer
+  z-index: 2
   height: 100%
 </style>
