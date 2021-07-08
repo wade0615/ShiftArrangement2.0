@@ -2,7 +2,7 @@
   <div class="dialog-time-picker text-center">
     <v-dialog
       v-model="dialog"
-      width="500"
+      max-width="1200"
     >
       <template v-slot:activator="{ on, attrs }">
         <v-btn
@@ -22,13 +22,7 @@
           Privacy Policy
         </v-card-title>
         <v-card-text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum,
-          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-          sunt in culpa qui officia deserunt mollit anim id est laborum.
+          <TimePicker />
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
