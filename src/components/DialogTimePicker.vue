@@ -22,6 +22,25 @@
           Privacy Policy
         </v-card-title>
         <v-card-text>
+          <v-slider
+            v-model="value"
+            step="1"
+            max="5"
+            thumb-label
+            ticks
+            prepend-icon="mdi-account-multiple"
+          >
+            <template v-slot:append>
+              <v-text-field
+                v-model="value"
+                class="mt-0 pt-0"
+                hide-details
+                single-line
+                type="number"
+                style="width: 60px"
+              ></v-text-field>
+            </template>
+          </v-slider>
           <TimePicker />
         </v-card-text>
         <v-divider></v-divider>
@@ -46,6 +65,7 @@ export default {
     return {
       name: 'dialogTimePicker',
       dialog: false,
+      value: 0,
     };
   },
 };
