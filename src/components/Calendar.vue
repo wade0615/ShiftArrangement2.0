@@ -1,5 +1,5 @@
 <template>
-  <div id="calendar">
+  <div class="calendar">
     第 {{ week }} 週
     <v-row no-gutters>
       <v-col
@@ -12,6 +12,13 @@
         >
           {{ weekdateText(n) }}
         </v-card>
+        <v-card
+          class="pa-2"
+          outlined
+          tile
+        >
+          <DialogTimePicker />
+        </v-card>
       </v-col>
     </v-row>
   </div>
@@ -22,6 +29,7 @@ export default {
   name: 'calendar',
   data: () => ({
     week: 0,
+    dialog: false,
   }),
   methods: {
     // 獲取今天是今年中的第幾週
@@ -75,6 +83,6 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-#calendar
+.calendar
   position: relative
 </style>
