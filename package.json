@@ -4,6 +4,11 @@
   "private": true,
   "scripts": {},
   "dependencies": {
+    "gulp-run": "^1.7.1",
     "lerna": "^4.0.0"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-run-command": "^0.0.10"
   }
 }
