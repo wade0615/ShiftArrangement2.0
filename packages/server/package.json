@@ -1,0 +1,11 @@
+{
+  "name": "shift-arrangement2.0-server",
+  "version": "0.0.0",
+  "description": "this package is the server of shift-arragement",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Steven Cheng",
+  "license": "MIT"
+}
