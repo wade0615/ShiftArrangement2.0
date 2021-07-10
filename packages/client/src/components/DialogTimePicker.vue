@@ -1,5 +1,5 @@
 <template>
-  <div class="dialog-time-picker text-center">
+  <div class="dialog-time-picker mb-1 text-center">
     <v-dialog
       v-model="dialog"
       max-width="1200"
