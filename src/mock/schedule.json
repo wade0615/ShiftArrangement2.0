@@ -1,0 +1,56 @@
+[
+  [
+    {
+      "manpower": "3",
+      "startTime": "09:00",
+      "endTime": "16:00"
+    },
+    {
+      "manpower": "2",
+      "startTime": "12:00",
+      "endTime": "21:00"
+    }
+  ],
+  [
+    {
+      "manpower": "3",
+      "startTime": "09:00",
+      "endTime": "16:00"
+    }
+  ],
+  [
+    {
+      "manpower": "3",
+      "startTime": "09:00",
+      "endTime": "16:00"
+    }
+  ],
+  [
+    {
+      "manpower": "4",
+      "startTime": "09:00",
+      "endTime": "16:00"
+    }
+  ],
+  [
+    {
+      "manpower": "5",
+      "startTime": "09:00",
+      "endTime": "16:00"
+    }
+  ],
+  [
+    {
+      "manpower": "6",
+      "startTime": "09:00",
+      "endTime": "16:00"
+    }
+  ],
+  [
+    {
+      "manpower": "7",
+      "startTime": "09:00",
+      "endTime": "16:00"
+    }
+  ]
+]

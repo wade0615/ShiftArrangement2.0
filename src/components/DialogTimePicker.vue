@@ -12,9 +12,9 @@
           v-on="on"
         >
           <v-icon small>mdi-account-multiple</v-icon>
-          <span class="mr-2">3</span>
+          <span class="mr-2">{{ manpower }}</span>
           <v-icon small>mdi-clock-outline</v-icon>
-          <span>09:00~16:00</span>
+          <span>{{ startTime }}~{{ endTime }}</span>
         </v-btn>
       </template>
       <v-card>
@@ -23,7 +23,7 @@
         </v-card-title>
         <v-card-text>
           <v-slider
-            v-model="value"
+            v-model="maxManpower"
             step="1"
             max="5"
             thumb-label
@@ -32,7 +32,7 @@
           >
             <template v-slot:append>
               <v-text-field
-                v-model="value"
+                v-model="maxManpower"
                 class="mt-0 pt-0"
                 hide-details
                 single-line
@@ -61,12 +61,32 @@
 
 <script>
 export default {
+  props: ['scheduleConfig'],
+  watch: {
+    scheduleConfig() {
+      console.log('scheduleConfig', this.scheduleConfig);
+      this.setSchedule(this.scheduleConfig);
+    },
+  },
   data() {
     return {
       name: 'dialogTimePicker',
       dialog: false,
-      value: 0,
+      maxManpower: 0,
+      manpower: 0,
+      startTime: undefined,
+      endTime: undefined,
     };
+  },
+  methods: {
+    setSchedule(scheduleConfig) {
+      this.manpower = scheduleConfig.manpower;
+      this.startTime = scheduleConfig.startTime;
+      this.endTime = scheduleConfig.endTime;
+    },
+  },
+  mounted() {
+    this.setSchedule(this.scheduleConfig);
   },
 };
 </script>

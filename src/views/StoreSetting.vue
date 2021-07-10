@@ -2,7 +2,7 @@
   <div id="store-setting">
     <v-expansion-panels focusable popout>
       <v-expansion-panel
-        v-for="(item,i) in 5"
+        v-for="(item,i) in 3"
         :key="i"
       >
         <v-expansion-panel-header>Item</v-expansion-panel-header>

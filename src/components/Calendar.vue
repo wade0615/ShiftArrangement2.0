@@ -3,21 +3,24 @@
     第 {{ week }} 週
     <v-row no-gutters>
       <v-col
-        v-for="n in 7" :key="n"
+        v-for="(daySchedule, index) in schedule" :key="'daySchedule'+index+1"
       >
         <v-card
           class="pa-2"
           outlined
           tile
         >
-          {{ weekdateText(n) }}
+          {{ weekdateText(index+1) }}
         </v-card>
         <v-card
           class="pa-2"
           outlined
           tile
         >
-          <DialogTimePicker />
+          <DialogTimePicker
+            v-for="(scheduleConfig, index) in daySchedule" :key="'scheduleConfig'+index+1"
+            :scheduleConfig="scheduleConfig"
+          />
         </v-card>
       </v-col>
     </v-row>
@@ -25,11 +28,14 @@
 </template>
 
 <script>
+import mockSchedule from '@/mock/schedule.json';
+
 export default {
   name: 'calendar',
   data: () => ({
     week: 0,
     dialog: false,
+    schedule: [],
   }),
   methods: {
     // 獲取今天是今年中的第幾週
@@ -78,6 +84,7 @@ export default {
   },
   mounted() {
     this.week = this.getWeek();
+    this.schedule = mockSchedule;
   },
 };
 </script>
