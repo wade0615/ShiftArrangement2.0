@@ -11,6 +11,7 @@
           :max="end"
           format="24hr"
           ampm-in-title
+          @change="newTime"
         ></v-time-picker>
       </v-col>
       <v-col style="width: 350px; flex: 0 1 auto;">
@@ -20,6 +21,7 @@
           :min="start"
           format="24hr"
           ampm-in-title
+          @change="newTime"
         ></v-time-picker>
       </v-col>
     </v-row>
@@ -40,6 +42,13 @@ export default {
     setTime(startTime, endTime) {
       this.start = startTime;
       this.end = endTime;
+    },
+    newTime() {
+      const newTime = {
+        start: this.start,
+        end: this.end,
+      };
+      this.$emit('change', newTime);
     },
   },
   mounted() {

@@ -52,6 +52,7 @@
           <TimePicker
             :startTime="startTime"
             :endTime="endTime"
+            @change="setNewTime"
           />
         </v-card-text>
         <v-divider></v-divider>
@@ -60,9 +61,9 @@
           <v-btn
             color="primary"
             text
-            @click="dialog = false"
+            @click="confirmScheduleConfig()"
           >
-            I accept
+            Confirm
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -93,6 +94,14 @@ export default {
       this.manpower = scheduleConfig.manpower;
       this.startTime = scheduleConfig.startTime;
       this.endTime = scheduleConfig.endTime;
+    },
+    confirmScheduleConfig() {
+      this.dialog = false;
+      console.log('Confirm the schedule configuration');
+    },
+    setNewTime(newTime) {
+      this.startTime = newTime.start;
+      this.endTime = newTime.end;
     },
   },
   mounted() {
