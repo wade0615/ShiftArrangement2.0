@@ -29,11 +29,21 @@
 <script>
 export default {
   name: 'timePicker',
+  props: ['startTime', 'endTime'],
   data() {
     return {
       start: null,
       end: null,
     };
+  },
+  methods: {
+    setTime(startTime, endTime) {
+      this.start = startTime;
+      this.end = endTime;
+    },
+  },
+  mounted() {
+    this.setTime(this.startTime, this.endTime);
   },
 };
 </script>

@@ -11,7 +11,7 @@
             v-for="(shiftTable,index) in store.shiftTable"
             :key="'shiftTable'+index+1"
             :shiftTable="shiftTable"
-            class="mb-3"
+            class="pt-3"
           />
         </v-expansion-panel-content>
       </v-expansion-panel>

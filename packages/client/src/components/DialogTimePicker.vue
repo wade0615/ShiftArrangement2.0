@@ -27,27 +27,32 @@
         <v-card-title class="text-h5 grey lighten-2">
           Privacy Policy
         </v-card-title>
-        <v-card-text>
-          <v-slider
-            v-model="maxManpower"
-            step="1"
-            max="5"
-            thumb-label
-            ticks
-            prepend-icon="mdi-account-multiple"
-          >
-            <template v-slot:append>
-              <v-text-field
-                v-model="maxManpower"
-                class="mt-0 pt-0"
-                hide-details
-                single-line
-                type="number"
-                style="width: 60px"
-              ></v-text-field>
-            </template>
-          </v-slider>
-          <TimePicker />
+        <v-card-text class="pa-4">
+          <div class="slider">
+            <v-slider
+              v-model="manpower"
+              step="1"
+              max="5"
+              thumb-label
+              ticks
+              prepend-icon="mdi-account-multiple"
+            >
+              <template v-slot:append>
+                <v-text-field
+                  v-model="manpower"
+                  class="mt-0 pt-0"
+                  hide-details
+                  single-line
+                  type="number"
+                  style="width: 60px"
+                ></v-text-field>
+              </template>
+            </v-slider>
+          </div>
+          <TimePicker
+            :startTime="startTime"
+            :endTime="endTime"
+          />
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
@@ -78,7 +83,6 @@ export default {
     return {
       name: 'dialogTimePicker',
       dialog: false,
-      maxManpower: 0,
       manpower: 0,
       startTime: undefined,
       endTime: undefined,
@@ -100,4 +104,8 @@ export default {
 <style lang="sass" scoped>
 .dialog-time-picker
   position: relative
+.slider
+  max-width: 600px
+  margin: 0 auto
+  padding: 12px 0
 </style>
