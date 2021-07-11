@@ -11,10 +11,16 @@
           v-bind="attrs"
           v-on="on"
         >
-          <v-icon small>mdi-account-multiple</v-icon>
-          <span class="mr-2">{{ manpower }}</span>
-          <v-icon small>mdi-clock-outline</v-icon>
-          <span>{{ startTime }}~{{ endTime }}</span>
+          <div class="d-flex flex-column">
+            <div class="d-flex align-center">
+              <v-icon small>mdi-account-multiple</v-icon>
+              <span class="mr-2">{{ manpower }}</span>
+            </div>
+            <div class="d-flex align-center">
+              <v-icon small>mdi-clock-outline</v-icon>
+              <span>{{ startTime }}~{{ endTime }}</span>
+            </div>
+          </div>
         </v-btn>
       </template>
       <v-card>

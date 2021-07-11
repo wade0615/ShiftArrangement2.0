@@ -28,10 +28,9 @@
 </template>
 
 <script>
-import mockSchedule from '@/mock/schedule.json';
-
 export default {
   name: 'calendar',
+  props: ['shiftTable'],
   data: () => ({
     week: 0,
     dialog: false,
@@ -83,8 +82,9 @@ export default {
     },
   },
   mounted() {
-    this.week = this.getWeek();
-    this.schedule = mockSchedule;
+    // this.week = this.getWeek();
+    this.week = this.shiftTable.week;
+    this.schedule = this.shiftTable.schedule;
   },
 };
 </script>

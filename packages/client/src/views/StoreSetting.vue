@@ -2,16 +2,17 @@
   <div id="store-setting">
     <v-expansion-panels focusable popout>
       <v-expansion-panel
-        v-for="(item,i) in 3"
-        :key="i"
+        v-for="(store,index) in stores"
+        :key="'store'+index+1"
       >
-        <v-expansion-panel-header>Item</v-expansion-panel-header>
+        <v-expansion-panel-header>{{ store.storeName }}</v-expansion-panel-header>
         <v-expansion-panel-content>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          <Calendar />
+          <Calendar
+            v-for="(shiftTable,index) in store.shiftTable"
+            :key="'shiftTable'+index+1"
+            :shiftTable="shiftTable"
+            class="mb-3"
+          />
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
@@ -19,10 +20,16 @@
 </template>
 
 <script>
+import mockStores from '@/mock/stores.json';
+
 export default {
   name: 'storeSetting',
   data: () => ({
+    stores: [],
   }),
+  mounted() {
+    this.stores = mockStores;
+  },
 };
 </script>
 
