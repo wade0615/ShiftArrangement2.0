@@ -17,10 +17,28 @@
           outlined
           tile
         >
+          <!-- 班別 -->
           <DialogTimePicker
             v-for="(scheduleConfig, index) in daySchedule" :key="'scheduleConfig'+index+1"
             :scheduleConfig="scheduleConfig"
           />
+          <!-- 增減一個班別 -->
+          <div class="text-center" style="min-width: 140px; margin: 0 auto;">
+            <v-btn x-small
+              :disabled="daySchedule.length < 1"
+              @click="removeSchedule(index)">
+              <v-icon small>
+                mdi-minus-circle-outline
+              </v-icon>
+            </v-btn>
+            <v-btn x-small
+              :disabled="daySchedule.length > 6"
+              @click="addSchedule(index)">
+              <v-icon small>
+                mdi-plus-circle-outline
+              </v-icon>
+            </v-btn>
+          </div>
         </v-card>
       </v-col>
     </v-row>
@@ -79,6 +97,22 @@ export default {
           console.log('err');
       }
       return weekText;
+    },
+    // 刪去一個班別
+    removeSchedule(weekDay) {
+      const schedule = this.schedule[weekDay];
+      schedule.pop();
+      this.schedule[weekDay] = schedule;
+    },
+    // 添加一個班別
+    addSchedule(weekDay) {
+      const schedule = this.schedule[weekDay];
+      schedule.push({
+        manpower: '3',
+        startTime: '09:00',
+        endTime: '16:00',
+      });
+      this.schedule[weekDay] = schedule;
     },
   },
   mounted() {
