@@ -1,6 +1,6 @@
 <template>
   <div class="calendar">
-    第 {{ week }} 週
+    {{ week }}
     <v-row no-gutters>
       <v-col
         v-for="(daySchedule, index) in schedule" :key="'daySchedule'+index+1"
