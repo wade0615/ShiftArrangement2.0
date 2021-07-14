@@ -1,6 +1,6 @@
 <template>
   <div class="calendar">
-    第 {{ week }} 週
+    {{ week }}
     <v-row no-gutters>
       <v-col
         v-for="(daySchedule, index) in schedule" :key="'daySchedule'+index+1"
@@ -17,10 +17,28 @@
           outlined
           tile
         >
+          <!-- 班別 -->
           <DialogTimePicker
             v-for="(scheduleConfig, index) in daySchedule" :key="'scheduleConfig'+index+1"
             :scheduleConfig="scheduleConfig"
           />
+          <!-- 增減一個班別 -->
+          <div class="text-center" style="min-width: 140px; margin: 0 auto;">
+            <v-btn x-small
+              :disabled="daySchedule.length < 1"
+              @click="removeSchedule(index)">
+              <v-icon small>
+                mdi-minus-circle-outline
+              </v-icon>
+            </v-btn>
+            <v-btn x-small
+              :disabled="daySchedule.length > 6"
+              @click="addSchedule(index)">
+              <v-icon small>
+                mdi-plus-circle-outline
+              </v-icon>
+            </v-btn>
+          </div>
         </v-card>
       </v-col>
     </v-row>
@@ -28,10 +46,9 @@
 </template>
 
 <script>
-import mockSchedule from '@/mock/schedule.json';
-
 export default {
   name: 'calendar',
+  props: ['shiftTable'],
   data: () => ({
     week: 0,
     dialog: false,
@@ -81,10 +98,27 @@ export default {
       }
       return weekText;
     },
+    // 刪去一個班別
+    removeSchedule(weekDay) {
+      const schedule = this.schedule[weekDay];
+      schedule.pop();
+      this.schedule[weekDay] = schedule;
+    },
+    // 添加一個班別
+    addSchedule(weekDay) {
+      const schedule = this.schedule[weekDay];
+      schedule.push({
+        manpower: '3',
+        startTime: '09:00',
+        endTime: '16:00',
+      });
+      this.schedule[weekDay] = schedule;
+    },
   },
   mounted() {
-    this.week = this.getWeek();
-    this.schedule = mockSchedule;
+    // this.week = this.getWeek();
+    this.week = this.shiftTable.week;
+    this.schedule = this.shiftTable.schedule;
   },
 };
 </script>
