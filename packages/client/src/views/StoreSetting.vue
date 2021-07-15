@@ -1,12 +1,16 @@
 <template>
   <div id="store-setting">
-    <v-expansion-panels focusable popout>
+    <v-expansion-panels focusable popout
+      class="mb-5">
       <v-expansion-panel
         v-for="(store,index) in stores"
         :key="'store'+index+1"
       >
         <v-expansion-panel-header>{{ store.storeName }}</v-expansion-panel-header>
-        <v-expansion-panel-content>
+        <v-expansion-panel-content class="pt-2">
+          <!--  刪除店家按鈕 -->
+          <ConfirmDel @confirmDialog="delStore(index)" />
+
           <Calendar
             v-for="(shiftTable,index) in store.shiftTable"
             :key="'shiftTable'+index+1"
@@ -16,11 +20,21 @@
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
+    <!-- 新增店家按鈕 -->
+    <v-btn fab
+      class="d-block ma-0 ml-auto mr-auto"
+      :disabled="stores.length > 5"
+      @click="addStore()">
+      <v-icon large>
+        mdi-plus-circle-outline
+      </v-icon>
+    </v-btn>
   </div>
 </template>
 
 <script>
 import mockStores from '@/mock/stores.json';
+import mockNewStore from '@/mock/newStore.json';
 
 export default {
   name: 'storeSetting',
@@ -84,6 +98,14 @@ export default {
         curStore.shiftTable[1].week = this.getWeekDate(week + 1);
         this.stores[index] = curStore;
       });
+    },
+    addStore() {
+      this.stores.push(mockNewStore);
+    },
+    delStore(index) {
+      const stores = this.stores.map((e) => e);
+      stores.splice(index, 1);
+      this.stores = stores;
     },
   },
   mounted() {
