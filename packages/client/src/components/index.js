@@ -1,12 +1,13 @@
 import Vue from 'vue';
-import HelloWorld from './HelloWorld.vue';
-import Navbar from './Navbar.vue';
-import Parallax from './Parallax.vue';
-import NavigationDrawer from './NavigationDrawer.vue';
-import Calendar from './Calendar.vue';
-import DialogTimePicker from './DialogTimePicker.vue';
-import TimePicker from './TimePicker.vue';
-import ConfirmDel from './ConfirmDel.vue';
+import HelloWorld from '@/components/HelloWorld.vue';
+import Navbar from '@/components/Navbar.vue';
+import Parallax from '@/components/Parallax.vue';
+import NavigationDrawer from '@/components/NavigationDrawer.vue';
+import Calendar from '@/components/Calendar.vue';
+import DialogTimePicker from '@/components/DialogTimePicker.vue';
+import TimePicker from '@/components/TimePicker.vue';
+import ConfirmDel from '@/components/ConfirmDel.vue';
+import DialogNewStore from '@/components/DialogNewStore.vue';
 
 Vue.component('HelloWorld', HelloWorld);
 Vue.component('Navbar', Navbar);
@@ -16,3 +17,4 @@ Vue.component('Calendar', Calendar);
 Vue.component('DialogTimePicker', DialogTimePicker);
 Vue.component('TimePicker', TimePicker);
 Vue.component('ConfirmDel', ConfirmDel);
+Vue.component('DialogNewStore', DialogNewStore);

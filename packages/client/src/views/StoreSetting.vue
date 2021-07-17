@@ -21,14 +21,7 @@
       </v-expansion-panel>
     </v-expansion-panels>
     <!-- 新增店家按鈕 -->
-    <v-btn fab
-      class="d-block ma-0 ml-auto mr-auto"
-      :disabled="stores.length > 5"
-      @click="addStore()">
-      <v-icon large>
-        mdi-plus-circle-outline
-      </v-icon>
-    </v-btn>
+    <DialogNewStore :active="canAddNewStore" @confirmDialog="addStore" />
   </div>
 </template>
 
@@ -99,13 +92,20 @@ export default {
         this.stores[index] = curStore;
       });
     },
-    addStore() {
-      this.stores.push(mockNewStore);
+    addStore(value) {
+      const newStore = JSON.parse(JSON.stringify(mockNewStore));
+      newStore.storeName = value;
+      this.stores.push(newStore);
     },
     delStore(index) {
       const stores = this.stores.map((e) => e);
       stores.splice(index, 1);
       this.stores = stores;
+    },
+  },
+  computed: {
+    canAddNewStore() {
+      return Boolean(this.stores.length > 5);
     },
   },
   mounted() {
