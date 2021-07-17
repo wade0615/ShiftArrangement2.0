@@ -1,5 +1,5 @@
 <template>
-  <div class="input-dialog text-center">
+  <div class="dialog-new-store text-center">
     <v-btn fab
       class="d-block ma-0 ml-auto mr-auto"
       :disabled="active"
@@ -29,6 +29,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
+            :disabled="!canAddNewStore()"
             text
             @click="confirmDialog()"
           >
@@ -42,7 +43,7 @@
 
 <script>
 export default {
-  name: 'InputDialog',
+  name: 'dialogNewStore',
   props: ['active'],
   data: () => ({
     dialog: false,
@@ -61,11 +62,14 @@ export default {
       this.dialog = false;
       this.value = '';
     },
+    canAddNewStore() {
+      return Boolean(this.value && this.value.split('').length >= 2);
+    },
   },
 };
 </script>
 
 <style lang="sass" scoped>
-.input-dialog
+.dialog-new-store
   position: relative
 </style>
