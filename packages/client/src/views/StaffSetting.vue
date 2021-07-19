@@ -4,14 +4,17 @@
     <v-data-table
       :headers="headers"
       :items="desserts"
-      sort-by="calories"
+      sort-by="name"
       class="elevation-1"
+      height="auto"
+      hide-default-footer
+      :items-per-page="-1"
     >
       <template v-slot:top>
         <v-toolbar
           flat
         >
-          <v-toolbar-title>My CRUD</v-toolbar-title>
+          <v-toolbar-title>All staff</v-toolbar-title>
           <v-divider
             class="mx-4"
             inset
@@ -30,7 +33,7 @@
                 v-bind="attrs"
                 v-on="on"
               >
-                New Item
+                New Employee
               </v-btn>
             </template>
             <v-card>
@@ -56,10 +59,26 @@
                       sm="6"
                       md="4"
                     >
-                      <v-text-field
-                        v-model="editedItem.calories"
-                        label="Calories"
-                      ></v-text-field>
+                      <v-select
+                        :items="jobTitles"
+                        item-text="text"
+                        item-value="value"
+                        v-model="editedItem.jobTitle"
+                        label="職稱"
+                        solo
+                      ></v-select>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      sm="6"
+                      md="4"
+                    >
+                      <v-select
+                        :items="ranks"
+                        v-model="editedItem.rank"
+                        label="職等"
+                        solo
+                      ></v-select>
                     </v-col>
                     <v-col
                       cols="12"
@@ -67,18 +86,8 @@
                       md="4"
                     >
                       <v-text-field
-                        v-model="editedItem.fat"
-                        label="Fat (g)"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col
-                      cols="12"
-                      sm="6"
-                      md="4"
-                    >
-                      <v-text-field
-                        v-model="editedItem.carbs"
-                        label="Carbs (g)"
+                        v-model="editedItem.priorityBranch"
+                        label="priorityBranch"
                       ></v-text-field>
                     </v-col>
                   </v-row>
@@ -168,25 +177,36 @@ export default {
         align: 'start',
         value: 'name',
       },
-      { text: '職稱', value: 'calories' },
-      { text: '職等', value: 'fat' },
-      { text: '優先分店', value: 'carbs' },
+      { text: '職稱', value: 'jobTitle' },
+      { text: '職等', value: 'rank' },
+      { text: '優先分店', value: 'priorityBranch' },
       { text: '編輯', value: 'actions', sortable: false },
     ],
     desserts: [],
     editedIndex: -1,
     editedItem: {
       name: '',
-      calories: 0,
-      fat: 0,
-      carbs: 0,
+      jobTitle: 0,
+      rank: 0,
+      priorityBranch: 0,
     },
     defaultItem: {
       name: '',
-      calories: 0,
-      fat: 0,
-      carbs: 0,
+      jobTitle: 0,
+      rank: 0,
+      priorityBranch: 0,
     },
+    jobTitles: [
+      {
+        text: '全職 FT',
+        value: 'FT',
+      },
+      {
+        text: '兼職 PT',
+        value: 'PT',
+      },
+    ],
+    ranks: ['Junior', 'Senior'],
   }),
   computed: {
     formTitle() {
@@ -195,7 +215,7 @@ export default {
   },
   methods: {
     initialize() {
-      this.desserts = mockStaffs;
+      this.desserts = [...mockStaffs];
     },
     editItem(item) {
       this.editedIndex = this.desserts.indexOf(item);
