@@ -8,6 +8,7 @@ import DialogTimePicker from '@/components/DialogTimePicker.vue';
 import TimePicker from '@/components/TimePicker.vue';
 import ConfirmDel from '@/components/ConfirmDel.vue';
 import DialogNewStore from '@/components/DialogNewStore.vue';
+import Table from '@/components/Table.vue';
 
 Vue.component('HelloWorld', HelloWorld);
 Vue.component('Navbar', Navbar);
@@ -18,3 +19,4 @@ Vue.component('DialogTimePicker', DialogTimePicker);
 Vue.component('TimePicker', TimePicker);
 Vue.component('ConfirmDel', ConfirmDel);
 Vue.component('DialogNewStore', DialogNewStore);
+Vue.component('Table', Table);

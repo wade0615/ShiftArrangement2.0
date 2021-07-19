@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Frozen Yogurt",
+    "jobTitle": "FT",
+    "rank": "Junior",
+    "priorityStore": "喬治約翰"
+  },
+  {
+    "name": "Ice cream sandwich",
+    "jobTitle": "FT",
+    "rank": "Senior",
+    "priorityStore": "喬治約翰"
+  },
+  {
+    "name": "Eclair",
+    "jobTitle": "PT",
+    "rank": "Senior",
+    "priorityStore": "黃金約翰"
+  },
+  {
+    "name": "Cupcake",
+    "jobTitle": "FT",
+    "rank": "Junior",
+    "priorityStore": "喬治約翰"
+  },
+  {
+    "name": "Gingerbread",
+    "jobTitle": "PT",
+    "rank": "Junior",
+    "priorityStore": "黃金約翰"
+  },
+  {
+    "name": "Jelly bean",
+    "jobTitle": "PT",
+    "rank": "Senior",
+    "priorityStore": "喬治約翰"
+  },
+  {
+    "name": "Lollipop",
+    "jobTitle": "FT",
+    "rank": "Junior",
+    "priorityStore": "喬治約翰"
+  },
+  {
+    "name": "Honeycomb",
+    "jobTitle": "FT",
+    "rank": "Senior",
+    "priorityStore": "喬治約翰"
+  },
+  {
+    "name": "Donut",
+    "jobTitle": "FT",
+    "rank": "Senior",
+    "priorityStore": "黃金約翰"
+  },
+  {
+    "name": "KitKat",
+    "jobTitle": "PT",
+    "rank": "Senior",
+    "priorityStore": "黃金約翰"
+  }
+]
