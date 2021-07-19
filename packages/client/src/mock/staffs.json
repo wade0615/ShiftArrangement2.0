@@ -3,60 +3,60 @@
     "name": "Frozen Yogurt",
     "jobTitle": "FT",
     "rank": "Junior",
-    "priorityBranch": 24
+    "priorityStore": "喬治約翰"
   },
   {
     "name": "Ice cream sandwich",
     "jobTitle": "FT",
     "rank": "Senior",
-    "priorityBranch": 37
+    "priorityStore": "喬治約翰"
   },
   {
     "name": "Eclair",
     "jobTitle": "PT",
     "rank": "Senior",
-    "priorityBranch": 23
+    "priorityStore": "黃金約翰"
   },
   {
     "name": "Cupcake",
     "jobTitle": "FT",
     "rank": "Junior",
-    "priorityBranch": 67
+    "priorityStore": "喬治約翰"
   },
   {
     "name": "Gingerbread",
     "jobTitle": "PT",
     "rank": "Junior",
-    "priorityBranch": 49
+    "priorityStore": "黃金約翰"
   },
   {
     "name": "Jelly bean",
     "jobTitle": "PT",
     "rank": "Senior",
-    "priorityBranch": 94
+    "priorityStore": "喬治約翰"
   },
   {
     "name": "Lollipop",
     "jobTitle": "FT",
     "rank": "Junior",
-    "priorityBranch": 98
+    "priorityStore": "喬治約翰"
   },
   {
     "name": "Honeycomb",
     "jobTitle": "FT",
     "rank": "Senior",
-    "priorityBranch": 87
+    "priorityStore": "喬治約翰"
   },
   {
     "name": "Donut",
     "jobTitle": "FT",
     "rank": "Senior",
-    "priorityBranch": 51
+    "priorityStore": "黃金約翰"
   },
   {
     "name": "KitKat",
     "jobTitle": "PT",
     "rank": "Senior",
-    "priorityBranch": 65
+    "priorityStore": "黃金約翰"
   }
 ]

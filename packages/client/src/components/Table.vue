@@ -10,6 +10,7 @@
       hide-default-footer
       :items-per-page="-1"
     >
+      <!-- 新增員工 -->
       <template v-slot:top>
         <v-toolbar
           flat
@@ -17,7 +18,7 @@
           <v-spacer></v-spacer>
           <v-dialog
             v-model="dialog"
-            max-width="500px"
+            max-width="1200px"
           >
             <template v-slot:activator="{ on, attrs }">
               <v-btn
@@ -40,12 +41,10 @@
                   <v-row>
                     <v-col
                       cols="12"
-                      sm="6"
-                      md="4"
                     >
                       <v-text-field
                         v-model="editedItem.name"
-                        label="Dessert name"
+                        label="Name"
                       ></v-text-field>
                     </v-col>
                     <v-col
@@ -79,15 +78,16 @@
                       sm="6"
                       md="4"
                     >
-                      <v-text-field
-                        v-model="editedItem.priorityBranch"
-                        label="priorityBranch"
-                      ></v-text-field>
+                      <v-select
+                        :items="stores"
+                        v-model="editedItem.priorityStore"
+                        label="分店"
+                        solo
+                      ></v-select>
                     </v-col>
                   </v-row>
                 </v-container>
               </v-card-text>
-
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn
@@ -107,6 +107,7 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
+          <!-- 刪除員工 -->
           <v-dialog v-model="dialogDelete" max-width="500px">
             <v-card>
               <v-card-title class="text-h5">
@@ -163,7 +164,7 @@
 <script>
 export default {
   name: 'StaffSetting',
-  props: ['staffsData'],
+  props: ['staffsData', 'stores'],
   watch: {
     dialog(val) {
       return val || this.close();
@@ -184,22 +185,22 @@ export default {
       },
       { text: '職稱', value: 'jobTitle' },
       { text: '職等', value: 'rank' },
-      { text: '優先分店', value: 'priorityBranch' },
+      { text: '優先分店', value: 'priorityStore' },
       { text: '編輯', value: 'actions', sortable: false },
     ],
     desserts: [],
     editedIndex: -1,
     editedItem: {
       name: '',
-      jobTitle: 0,
-      rank: 0,
-      priorityBranch: 0,
+      jobTitle: 'FT',
+      rank: 'Junior',
+      priorityStore: '',
     },
     defaultItem: {
       name: '',
-      jobTitle: 0,
-      rank: 0,
-      priorityBranch: 0,
+      jobTitle: '',
+      rank: '',
+      priorityStore: '',
     },
     jobTitles: [
       {
@@ -215,7 +216,7 @@ export default {
   }),
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? 'New Item' : 'Edit Item';
+      return this.editedIndex === -1 ? '新員工' : '編輯員工';
     },
   },
   methods: {
