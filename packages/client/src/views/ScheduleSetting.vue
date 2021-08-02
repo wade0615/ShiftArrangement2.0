@@ -1,22 +1,26 @@
 <template>
   <div id="schedule-setting" class="">
-    <v-select
-      :items="items"
-      item-text="name"
-      item-value="name"
-      label="Solo field"
-      solo
-    >
-      <!-- <template v-slot:item="{ item }">
-        <v-list dense class="pa-0">
-          <v-list-item>
-            <v-icon small v-if="item.jobTitle === 'FT'">mdi-pencil</v-icon>
-            <v-icon small v-if="item.jobTitle === 'PT'">mdi-check</v-icon>
-            {{ item.name }}
-          </v-list-item>
-        </v-list>
-      </template> -->
-    </v-select>
+    <v-expansion-panels accordion>
+      <v-expansion-panel
+        v-for="(staff,i) in staffs"
+        :key="i"
+      >
+        <v-expansion-panel-header disable-icon-rotate>
+          {{ staff.name }}
+          <template v-slot:actions>
+            <v-icon color="teal" v-if="staff.jobTitle === 'PT'">
+              mdi-check
+            </v-icon>
+            <v-icon color="error" v-else>
+              mdi-alert-circle
+            </v-icon>
+          </template>
+        </v-expansion-panel-header>
+        <v-expansion-panel-content>
+          <SelectWorkingDay :staff="staff" />
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-expansion-panels>
   </div>
 </template>
 
@@ -26,9 +30,15 @@ import mockStaffs from '@/mock/staffs.json';
 export default {
   name: 'ScheduleSetting',
   data: () => ({
-    items: mockStaffs,
+    staffs: [],
   }),
-  methods: {},
+  methods: {
+  },
+  mounted() {
+    this.staffs = JSON.parse(JSON.stringify(mockStaffs));
+  },
+  beforeMount() {
+  },
 };
 </script>
 

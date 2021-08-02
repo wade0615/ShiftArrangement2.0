@@ -9,6 +9,7 @@ import TimePicker from '@/components/TimePicker.vue';
 import ConfirmDel from '@/components/ConfirmDel.vue';
 import DialogNewStore from '@/components/DialogNewStore.vue';
 import Table from '@/components/Table.vue';
+import SelectWorkingDay from '@/components/SelectWorkingDay.vue';
 
 Vue.component('HelloWorld', HelloWorld);
 Vue.component('Navbar', Navbar);
@@ -20,3 +21,4 @@ Vue.component('TimePicker', TimePicker);
 Vue.component('ConfirmDel', ConfirmDel);
 Vue.component('DialogNewStore', DialogNewStore);
 Vue.component('Table', Table);
+Vue.component('SelectWorkingDay', SelectWorkingDay);
