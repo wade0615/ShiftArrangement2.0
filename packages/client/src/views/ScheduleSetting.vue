@@ -8,12 +8,15 @@
         <v-expansion-panel-header disable-icon-rotate>
           {{ staff.name }}
           <template v-slot:actions>
-            <v-icon color="teal" v-if="staff.jobTitle === 'PT'">
+            <v-icon color="blue-grey lighten-2">
+              mdi-pencil
+            </v-icon>
+            <!-- <v-icon color="teal" v-if="staff.jobTitle === 'PT'">
               mdi-check
             </v-icon>
             <v-icon color="error" v-else>
               mdi-alert-circle
-            </v-icon>
+            </v-icon> -->
           </template>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
