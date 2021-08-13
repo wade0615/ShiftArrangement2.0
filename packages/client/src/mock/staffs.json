@@ -1,62 +1,102 @@
 [
   {
-    "name": "Frozen Yogurt",
+    "name": "John",
     "jobTitle": "FT",
     "rank": "Junior",
-    "priorityStore": "喬治約翰"
+    "priorityStore": "喬治約翰",
+    "workingDay": {
+      "weekOne": [true, true, true, true, true, false, true],
+      "weekTwo": [true, true, true, false, true, true, true]
+    }
   },
   {
-    "name": "Ice cream sandwich",
+    "name": "George",
     "jobTitle": "FT",
     "rank": "Senior",
-    "priorityStore": "喬治約翰"
+    "priorityStore": "喬治約翰",
+    "workingDay": {
+      "weekOne": [true, true, true, true, true, false, true],
+      "weekTwo": [true, true, true, false, true, true, true]
+    }
   },
   {
-    "name": "Eclair",
+    "name": "Mattew",
     "jobTitle": "PT",
     "rank": "Senior",
-    "priorityStore": "黃金約翰"
+    "priorityStore": "黃金約翰",
+    "workingDay": {
+      "weekOne": [true, true, true, true, true, false, true],
+      "weekTwo": [true, true, true, false, true, true, true]
+    }
   },
   {
-    "name": "Cupcake",
+    "name": "Claire",
     "jobTitle": "FT",
     "rank": "Junior",
-    "priorityStore": "喬治約翰"
+    "priorityStore": "喬治約翰",
+    "workingDay": {
+      "weekOne": [true, true, true, true, true, false, true],
+      "weekTwo": [true, true, true, false, true, true, true]
+    }
   },
   {
-    "name": "Gingerbread",
+    "name": "Eve",
     "jobTitle": "PT",
     "rank": "Junior",
-    "priorityStore": "黃金約翰"
+    "priorityStore": "黃金約翰",
+    "workingDay": {
+      "weekOne": [true, true, true, true, true, false, true],
+      "weekTwo": [true, true, true, false, true, true, true]
+    }
   },
   {
-    "name": "Jelly bean",
+    "name": "Jerry",
     "jobTitle": "PT",
     "rank": "Senior",
-    "priorityStore": "喬治約翰"
+    "priorityStore": "喬治約翰",
+    "workingDay": {
+      "weekOne": [true, true, true, true, true, false, true],
+      "weekTwo": [true, true, true, false, true, true, true]
+    }
   },
   {
-    "name": "Lollipop",
+    "name": "Stanley",
     "jobTitle": "FT",
     "rank": "Junior",
-    "priorityStore": "喬治約翰"
+    "priorityStore": "喬治約翰",
+    "workingDay": {
+      "weekOne": [true, true, true, true, true, false, true],
+      "weekTwo": [true, true, true, false, true, true, true]
+    }
   },
   {
-    "name": "Honeycomb",
+    "name": "Miley",
     "jobTitle": "FT",
     "rank": "Senior",
-    "priorityStore": "喬治約翰"
+    "priorityStore": "喬治約翰",
+    "workingDay": {
+      "weekOne": [true, true, true, true, true, false, true],
+      "weekTwo": [true, true, true, false, true, true, true]
+    }
   },
   {
-    "name": "Donut",
+    "name": "Sharon",
     "jobTitle": "FT",
     "rank": "Senior",
-    "priorityStore": "黃金約翰"
+    "priorityStore": "黃金約翰",
+    "workingDay": {
+      "weekOne": [true, true, true, true, true, false, true],
+      "weekTwo": [true, true, true, false, true, true, true]
+    }
   },
   {
-    "name": "KitKat",
+    "name": "Ban",
     "jobTitle": "PT",
     "rank": "Senior",
-    "priorityStore": "黃金約翰"
+    "priorityStore": "黃金約翰",
+    "workingDay": {
+      "weekOne": [true, true, true, true, true, false, true],
+      "weekTwo": [true, true, true, false, true, true, true]
+    }
   }
 ]
