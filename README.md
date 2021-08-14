@@ -83,7 +83,17 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+我曾是一名咖啡廳的店員，當時看到資深前輩每週都在為排班表的事傷透腦筋，從催促大家繳交上班/休假時間，
+到突發狀況的人員調動，我都暗自希望不會有輪到我要做這件事的一天，而後來轉職成為前端工程師之後，
+有天突然覺得，不知道自己有沒有能力開發出一個東西幫忙解決這項問題，因此 -- 這個專案誕生了。
+
+你在為每週的人員調度感到困擾嗎？
+你有 1~5 家的自營小店需要排班表嗎？
+你一個上班時段的人力不太會超過 5 人嗎？
+
+那你可以試試看這個，或許這就是你的解答
+
+<!-- There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
 
 Here's why:
 * Your time should be focused on creating something amazing. A project that solves a problem and helps others
@@ -92,10 +102,11 @@ Here's why:
 
 Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have have contributed to expanding this template!
 
-A list of commonly used resources that I find helpful are listed in the acknowledgements.
+A list of commonly used resources that I find helpful are listed in the acknowledgements. -->
 
 ### Built With
 
+* [vue](https://vuejs.org/)
 * [vuetify](https://vuetifyjs.com/en/)
 
 
