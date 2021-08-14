@@ -3,12 +3,21 @@
 
 [HackMD](https://hackmd.io/@Ab2Up_njS5OVUz8o_OvDCA/rkK-Flfsu)
 
-## README
-### Key words
-vue es-lint vuetify
-[vcalendar](https://vcalendar.io/)
+### Participants
+* Wade
+* Steven
+* Sedna
+* Nagi
+* Yuna
 
-### 階段-1
+### Key words
+[Vue](https://vuejs.org/)
+[es-lint](https://eslint.org/)
+[Jest](https://jestjs.io/)
+[Tailwindcss](https://tailwindcss.com/)
+[vuetify](https://vuetifyjs.com/en/)
+
+<!-- ### 階段-1
 以雪莉（最高使用者權限）為出發點，可以前端選擇單一員工時間，也可以彙整看到所有員工整合出來的班表。
 ### 階段-2
 建立後端與資料庫，將 階段-1 前後分離化
@@ -46,4 +55,4 @@ Pixi JS
 * MVP-2
 產出建議班表
 * MVP-3
-產出過去兩週各員工上班總時數
+產出過去兩週各員工上班總時數 -->
