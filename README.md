@@ -31,12 +31,12 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">Best-README-Template</h3>
+<h3 align="center">班表系統 2.0 <br> ShiftArrangement 2.0</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    An awesome small shop scheduling system that you have to try!
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <a href="https://hackmd.io/@Ab2Up_njS5OVUz8o_OvDCA/rkK-Flfsu"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
@@ -57,6 +57,7 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
+        <li><a href="#participants">Participants</a></li>
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
@@ -104,11 +105,16 @@ Of course, no one template will serve all projects since your needs may be diffe
 
 A list of commonly used resources that I find helpful are listed in the acknowledgements. -->
 
+### Participants
+* Wade
+* Steven
+* Sedna
+* Nagi
+* Yuna
+
 ### Built With
 
 * [vue](https://vuejs.org/)
-* [vuetify](https://vuetifyjs.com/en/)
-
 
 
 <!-- GETTING STARTED -->
