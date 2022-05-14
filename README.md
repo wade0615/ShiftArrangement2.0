@@ -111,6 +111,8 @@ A list of commonly used resources that I find helpful are listed in the acknowle
 * Sedna
 * Nagi
 * Yuna
+* Evena
+* Louis
 
 ### Built With
 
