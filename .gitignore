@@ -1,8 +1,8 @@
 .DS_Store
-*node_modules
-*dist
-*.nuxt
-*package-lock.json
+node_modules
+dist
+.nuxt
+package-lock.json
 *.gitignore
 
 # local env files
