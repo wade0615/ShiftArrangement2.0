@@ -1,10 +1,10 @@
 <template>
-  <div>Home</div>
+  <div>register</div>
 </template>
 
 <script>
 export default {
-  name: 'Home',
+  name: 'Register',
   props: [],
   data: () => {
     return {}
@@ -17,3 +17,5 @@ export default {
   methods: {},
 }
 </script>
+
+<style lang="sass" scoped></style>
