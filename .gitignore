@@ -2,7 +2,7 @@
 node_modules
 dist
 .nuxt
-package-lock.json
+# package-lock.json
 *.gitignore
 
 # local env files

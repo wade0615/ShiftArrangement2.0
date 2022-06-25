@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: '班表',
+    title: '班表 COSHIFT',
     htmlAttrs: {
       lang: 'en',
     },

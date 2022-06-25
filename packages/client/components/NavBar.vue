@@ -2,20 +2,21 @@
   <section>
     <v-app-bar color="deep-purple accent-4" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>班表 2.0</v-toolbar-title>
+      <v-toolbar-title>{{ title }}</v-toolbar-title>
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" absolute temporary>
       <v-list nav dense>
-        <v-subheader>分頁清單</v-subheader>
+        <v-subheader class="justify-end">
+          <v-icon @click="drawer = !drawer">mdi-close</v-icon>
+        </v-subheader>
         <v-list-item-group
           v-model="group"
           active-class="deep-purple--text text--accent-4"
         >
           <v-list-item v-for="(item, index) in list" :key="index + 'list'">
-            <nuxt-link :to="item.route" class="col-12 col-md-6">{{
-              item.label
-            }}</nuxt-link>
-            <v-list-item-title></v-list-item-title>
+            <nuxt-link :to="item.route" class="col-12 col-md-6">
+              {{ item.label }}
+            </nuxt-link>
           </v-list-item>
         </v-list-item-group>
       </v-list>
@@ -26,6 +27,7 @@
 <script>
 export default {
   data: () => ({
+    title: '班表 COSHIFT',
     drawer: false,
     group: null,
     list: [
@@ -70,3 +72,5 @@ export default {
   },
 }
 </script>
+
+<style lang="sass" scoped></style>
