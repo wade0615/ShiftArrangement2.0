@@ -9,23 +9,25 @@
         <p class="mb-3.5">
           請輸入本公司業務同仁提供給您的授權碼，如有任何問題歡迎您洽詢服務同仁。
         </p>
-        <v-text-field
-          outlined
-          background-color="#FFF"
-          dense
-          :rules="rules"
-          class="mb-8"
-        ></v-text-field>
-        <div class="text-center mb-8">
-          <v-btn
-            large
-            dark
-            color="#B7B7B7"
-            min-width="160"
-            @click="handleAuthorize"
-            >下一步</v-btn
-          >
-        </div>
+        <ValidationProvider>
+          <v-text-field
+            outlined
+            background-color="#FFF"
+            dense
+            :rules="rules"
+            class="mb-8"
+          ></v-text-field>
+          <div class="text-center mb-8">
+            <v-btn
+              large
+              dark
+              color="#B7B7B7"
+              min-width="160"
+              @click="handleAuthorize"
+              >下一步</v-btn
+            >
+          </div>
+        </ValidationProvider>
         <p class="text-center">
           還沒有授權碼嗎？
           <nuxt-link to="/">與我們聯繫</nuxt-link>
@@ -42,8 +44,12 @@
 </template>
 
 <script>
+import { ValidationProvider } from 'vee-validate'
 export default {
   name: 'Register',
+  components: {
+    ValidationProvider,
+  },
   props: [],
   data: () => {
     return {
