@@ -46,6 +46,7 @@
 export default {
   name: 'MainRegister',
   components: {},
+  layout: 'main',
   props: [],
   data: () => {
     return {
