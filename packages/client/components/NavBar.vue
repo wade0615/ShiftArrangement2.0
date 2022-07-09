@@ -60,7 +60,7 @@ export default {
         label: '設定',
       },
       {
-        route: '/register',
+        route: '/main/register',
         label: '註冊/登入',
       },
     ],
