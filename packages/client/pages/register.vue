@@ -9,25 +9,24 @@
         <p class="mb-3.5">
           請輸入本公司業務同仁提供給您的授權碼，如有任何問題歡迎您洽詢服務同仁。
         </p>
-        <ValidationProvider>
-          <v-text-field
-            outlined
-            background-color="#FFF"
-            dense
-            :rules="rules"
-            class="mb-8"
-          ></v-text-field>
-          <div class="text-center mb-8">
-            <v-btn
-              large
-              dark
-              color="#B7B7B7"
-              min-width="160"
-              @click="handleAuthorize"
-              >下一步</v-btn
-            >
-          </div>
-        </ValidationProvider>
+        <!-- <ValidationProvider ref="myinput" :rules="rules"> -->
+        <v-text-field
+          outlined
+          background-color="#FFF"
+          dense
+          class="mb-8"
+        ></v-text-field>
+        <div class="text-center mb-8">
+          <v-btn
+            large
+            dark
+            color="#B7B7B7"
+            min-width="160"
+            @click="handleAuthorize('myinput')"
+            >下一步</v-btn
+          >
+        </div>
+        <!-- </ValidationProvider> -->
         <p class="text-center">
           還沒有授權碼嗎？
           <nuxt-link to="/">與我們聯繫</nuxt-link>
@@ -44,21 +43,18 @@
 </template>
 
 <script>
-import { ValidationProvider } from 'vee-validate'
 export default {
   name: 'Register',
-  components: {
-    ValidationProvider,
-  },
+  components: {},
   props: [],
   data: () => {
     return {
       title: '店面管理員註冊',
       registerStep: 0,
-      rules: [
-        (value) => !!value || 'Required.',
-        (value) => (value || '').length <= 10 || 'Max 10 characters',
-      ],
+      // rules: [
+      //   (value) => !!value || 'Required.',
+      //   (value) => (value || '').length <= 10 || 'Max 10 characters',
+      // ],
     }
   },
   computed: {},
@@ -67,8 +63,15 @@ export default {
   beforeMount() {},
   updated() {},
   methods: {
-    handleAuthorize() {
-      this.registerStep = this.registerStep + 1
+    handleAuthorize(field) {
+      console.log('handleAuthorize')
+      //   const provider = this.$refs[field]
+      //   console.log('handleAuthorize', provider)
+      //   provider.validate().then((valid) => {
+      //     console.log('valid', valid)
+      //   })
+      //   // Validate the field
+      //   return provider.validate()
     },
   },
 }
