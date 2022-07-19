@@ -1,5 +1,5 @@
 <template>
-  <main id="register">
+  <main id="main-register">
     <h2>
       {{ title }}
     </h2>
@@ -9,24 +9,37 @@
         <p class="mb-3.5">
           請輸入本公司業務同仁提供給您的授權碼，如有任何問題歡迎您洽詢服務同仁。
         </p>
-        <!-- <ValidationProvider ref="myinput" :rules="rules"> -->
-        <v-text-field
-          outlined
-          background-color="#FFF"
-          dense
-          class="mb-8"
-        ></v-text-field>
-        <div class="text-center mb-8">
-          <v-btn
-            large
-            dark
-            color="#B7B7B7"
-            min-width="160"
-            @click="handleAuthorize('myinput')"
-            >下一步</v-btn
-          >
-        </div>
-        <!-- </ValidationProvider> -->
+        <ValidationObserver ref="observer" v-slot="{ invalid }">
+          <form @submit.prevent="submit">
+            <ValidationProvider ref="myinput" rules="required|max:10">
+              <!-- <ValidationProvider ref="myinput"> -->
+              <!-- <v-text-field
+                outlined
+                background-color="#FFF"
+                dense
+                class="mb-8"
+              ></v-text-field> -->
+              <v-text-field
+                v-model="name"
+                :counter="10"
+                label="Name"
+                required
+                class="mb-8"
+              ></v-text-field>
+            </ValidationProvider>
+            <div class="text-center mb-8">
+              <v-btn
+                large
+                dark
+                color="#B7B7B7"
+                min-width="160"
+                type="submit"
+                :disabled="invalid"
+                >下一步</v-btn
+              >
+            </div>
+          </form>
+        </ValidationObserver>
         <p class="text-center">
           還沒有授權碼嗎？
           <nuxt-link to="/">與我們聯繫</nuxt-link>
@@ -52,10 +65,14 @@ export default {
     return {
       title: '店面管理員註冊',
       registerStep: 0,
-      // rules: [
-      //   (value) => !!value || 'Required.',
-      //   (value) => (value || '').length <= 10 || 'Max 10 characters',
-      // ],
+      name: '',
+      rules: [
+        (value) => !!value || 'Required.',
+        (value) =>
+          (value || '').length >= 3 ||
+          (value || '').length <= 10 ||
+          'Max 10 characters',
+      ],
     }
   },
   computed: {},
@@ -64,6 +81,11 @@ export default {
   beforeMount() {},
   updated() {},
   methods: {
+    submit() {
+      console.log('submit')
+      this.$refs.observer.validate()
+      this.$router.push({ name: 'register' })
+    },
     handleAuthorize(field) {
       this.$router.push({ name: 'register' })
       //   const provider = this.$refs[field]
@@ -79,7 +101,7 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-#register
+#main-register
   min-height: calc(100vh - 56px)
   padding: 32px 16px
   h2
