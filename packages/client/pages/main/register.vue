@@ -9,32 +9,23 @@
         <p class="mb-3.5">
           請輸入本公司業務同仁提供給您的授權碼，如有任何問題歡迎您洽詢服務同仁。
         </p>
-        <ValidationObserver ref="observer" v-slot="{ invalid }">
+        <ValidationObserver ref="authCode">
+          <!-- <ValidationObserver ref="authCode" v-slot="{ invalid }"> -->
           <form @submit.prevent="submit">
             <ValidationProvider ref="myinput" rules="required|max:10">
-              <!-- <ValidationProvider ref="myinput"> -->
-              <!-- <v-text-field
+              <v-text-field
+                v-model="validationForm.authCode"
+                :counter="10"
+                placeholder="請輸入授權碼"
+                required
                 outlined
                 background-color="#FFF"
                 dense
                 class="mb-8"
-              ></v-text-field> -->
-              <v-text-field
-                v-model="name"
-                :counter="10"
-                label="Name"
-                required
-                class="mb-8"
               ></v-text-field>
             </ValidationProvider>
             <div class="text-center mb-8">
-              <v-btn
-                large
-                dark
-                color="#B7B7B7"
-                min-width="160"
-                type="submit"
-                :disabled="invalid"
+              <v-btn large dark color="#46B964" min-width="160" type="submit"
                 >下一步</v-btn
               >
             </div>
@@ -65,14 +56,9 @@ export default {
     return {
       title: '店面管理員註冊',
       registerStep: 0,
-      name: '',
-      rules: [
-        (value) => !!value || 'Required.',
-        (value) =>
-          (value || '').length >= 3 ||
-          (value || '').length <= 10 ||
-          'Max 10 characters',
-      ],
+      validationForm: {
+        authCode: '',
+      },
     }
   },
   computed: {},
@@ -81,20 +67,12 @@ export default {
   beforeMount() {},
   updated() {},
   methods: {
-    submit() {
-      console.log('submit')
-      this.$refs.observer.validate()
-      this.$router.push({ name: 'register' })
-    },
-    handleAuthorize(field) {
-      this.$router.push({ name: 'register' })
-      //   const provider = this.$refs[field]
-      //   console.log('handleAuthorize', provider)
-      //   provider.validate().then((valid) => {
-      //     console.log('valid', valid)
-      //   })
-      //   // Validate the field
-      //   return provider.validate()
+    async submit() {
+      /** 取得驗證是否通過，通過為 true */
+      const isValid = await this.$refs.authCode.validate()
+      if (isValid) {
+        this.$router.push({ name: 'register' })
+      }
     },
   },
 }
