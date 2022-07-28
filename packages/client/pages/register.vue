@@ -24,20 +24,49 @@
       <v-divider></v-divider>
     </div>
     <section>
-      <v-text-field
-        outlined
-        background-color="#FFF"
-        dense
-        label="請輸入您的 Email 電子郵件地址"
-        class="mb-8"
-      ></v-text-field>
-      <v-text-field
-        outlined
-        background-color="#FFF"
-        dense
-        label="設定您的密碼"
-        class="mb-8"
-      ></v-text-field>
+      <ValidationObserver ref="authCode" v-slot="{ invalid }">
+        <form @submit.prevent="submit">
+          <ValidationProvider ref="myinput" rules="required|max:10">
+            <p class="mb-2">Email*</p>
+            <v-text-field
+              v-model="validationForm.email"
+              placeholder="請輸入您的 Email 電子郵件地址"
+              required
+              outlined
+              background-color="#FFF"
+              dense
+              class="mb-8"
+            ></v-text-field>
+          </ValidationProvider>
+          <ValidationProvider ref="myinput" rules="required|max:10">
+            <p class="mb-2">密碼設定*</p>
+            <v-text-field
+              v-model="validationForm.password"
+              placeholder="設定您的密碼"
+              required
+              outlined
+              background-color="#FFF"
+              dense
+              class="mb-2"
+            ></v-text-field>
+          </ValidationProvider>
+          <span>密碼長度需要超過6個字元，並包含數字及英文字母。</span>
+          <StyledInput
+            v-model="validationForm.email"
+            placeholder="猜猜我是誰"
+          />
+          <div class="text-center mb-8">
+            <v-btn
+              large
+              color="#46B964"
+              min-width="160"
+              type="submit"
+              :disabled="invalid"
+              >註冊</v-btn
+            >
+          </div>
+        </form>
+      </ValidationObserver>
     </section>
   </main>
 </template>
@@ -51,6 +80,14 @@ export default {
     return {
       title: '店面管理員註冊',
       shopName: '薛丁格的咖啡',
+      validationForm: {
+        email: '',
+        password: '',
+      },
+      rule: {
+        email: 'required',
+        password: 'required',
+      },
     }
   },
   computed: {},
@@ -91,4 +128,7 @@ export default {
         margin: 0 16px 0 0
       a
         color: #007aff
+  section:nth-child(5)
+    span
+      color: #7E7E7E
 </style>
