@@ -1,5 +1,5 @@
 <template>
-  <div>Home</div>
+  <div id="home" data-app>Home</div>
 </template>
 
 <script>

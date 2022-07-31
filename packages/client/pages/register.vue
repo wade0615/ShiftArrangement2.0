@@ -1,5 +1,5 @@
 <template>
-  <main id="register">
+  <main id="register" data-app>
     <h2>
       {{ title }}
     </h2>
@@ -26,35 +26,31 @@
     <section>
       <ValidationObserver ref="authCode" v-slot="{ invalid }">
         <form @submit.prevent="submit">
-          <ValidationProvider ref="myinput" rules="required|max:10">
+          <ValidationProvider ref="email" rules="required|email">
             <p class="mb-2">Email*</p>
-            <v-text-field
+            <StyledInput
               v-model="validationForm.email"
               placeholder="請輸入您的 Email 電子郵件地址"
+              cssclass="mb-2"
               required
-              outlined
-              background-color="#FFF"
-              dense
-              class="mb-8"
-            ></v-text-field>
+            />
           </ValidationProvider>
-          <ValidationProvider ref="myinput" rules="required|max:10">
+          <ValidationProvider ref="pw" rules="required|max:8">
             <p class="mb-2">密碼設定*</p>
-            <v-text-field
+            <StyledInput
               v-model="validationForm.password"
+              type="password"
               placeholder="設定您的密碼"
+              hint="密碼長度需要超過6個字元，並包含數字及英文字母。"
+              cssclass="mb-6"
               required
-              outlined
-              background-color="#FFF"
-              dense
-              class="mb-2"
-            ></v-text-field>
+            />
           </ValidationProvider>
-          <span>密碼長度需要超過6個字元，並包含數字及英文字母。</span>
-          <StyledInput
-            v-model="validationForm.email"
-            placeholder="猜猜我是誰"
-          />
+          <p class="mb-6">
+            建立帳號代表你詳閱並同意 Coshift
+            <nuxt-link to="/">使用條款</nuxt-link> 與
+            <nuxt-link to="/">資料使用政策</nuxt-link>
+          </p>
           <div class="text-center mb-8">
             <v-btn
               large
@@ -95,7 +91,15 @@ export default {
   mounted() {},
   beforeMount() {},
   updated() {},
-  methods: {},
+  methods: {
+    async submit() {
+      /** 取得驗證是否通過，通過為 true */
+      const isValid = await this.$refs.authCode.validate()
+      if (isValid) {
+        this.$router.push({ name: 'Home' })
+      }
+    },
+  },
 }
 </script>
 
@@ -131,4 +135,6 @@ export default {
   section:nth-child(5)
     span
       color: #7E7E7E
+    a
+      color: #007aff
 </style>

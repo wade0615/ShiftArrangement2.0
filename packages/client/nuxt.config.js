@@ -3,7 +3,7 @@ export default {
   head: {
     title: '班表 COSHIFT',
     htmlAttrs: {
-      lang: 'en',
+      lang: 'zh-TW',
     },
     meta: [
       { charset: 'utf-8' },
@@ -12,6 +12,10 @@ export default {
       { name: 'format-detection', content: 'telephone=no' },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+  },
+
+  server: {
+    port: 3080, // default: 3000
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css

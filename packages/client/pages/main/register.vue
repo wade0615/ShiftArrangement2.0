@@ -1,5 +1,5 @@
 <template>
-  <main id="main-register">
+  <main id="main-register" data-app>
     <h2>
       {{ title }}
     </h2>
