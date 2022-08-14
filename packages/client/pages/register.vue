@@ -24,44 +24,47 @@
       <v-divider></v-divider>
     </div>
     <section>
-      <ValidationObserver ref="authCode" v-slot="{ invalid }">
-        <form @submit.prevent="submit">
-          <ValidationProvider ref="email" rules="required|email">
-            <p class="mb-2">Email*</p>
-            <StyledInput
-              v-model="validationForm.email"
-              placeholder="請輸入您的 Email 電子郵件地址"
-              cssclass="mb-2"
-              required
-            />
-          </ValidationProvider>
-          <ValidationProvider ref="pw" rules="required|max:8">
-            <p class="mb-2">密碼設定*</p>
-            <StyledInput
-              v-model="validationForm.password"
-              type="password"
-              placeholder="設定您的密碼"
-              hint="密碼長度需要超過6個字元，並包含數字及英文字母。"
-              cssclass="mb-6"
-              required
-            />
-          </ValidationProvider>
-          <p class="mb-6">
-            建立帳號代表你詳閱並同意 Coshift
-            <nuxt-link to="/">使用條款</nuxt-link> 與
-            <nuxt-link to="/">資料使用政策</nuxt-link>
-          </p>
-          <div class="text-center mb-8">
-            <v-btn
-              large
-              color="#46B964"
-              min-width="160"
-              type="submit"
-              :disabled="invalid"
-              >註冊</v-btn
-            >
-          </div>
-        </form>
+      <ValidationObserver
+        v-slot="{ invalid }"
+        ref="authCode"
+        tag="form"
+        @submit.prevent="submit()"
+      >
+        <ValidationProvider ref="email" :rules="rules.email">
+          <p class="mb-2">Email*</p>
+          <StyledInput
+            v-model="validationForm.email"
+            placeholder="請輸入您的 Email 電子郵件地址"
+            cssclass="mb-2"
+            required
+          />
+        </ValidationProvider>
+        <ValidationProvider ref="password" :rules="rules.password">
+          <p class="mb-2">密碼設定*</p>
+          <StyledInput
+            v-model="validationForm.password"
+            type="password"
+            placeholder="設定您的密碼"
+            hint="密碼長度需要超過6個字元，並包含數字及英文字母。"
+            cssclass="mb-6"
+            required
+          />
+        </ValidationProvider>
+        <p class="mb-6">
+          建立帳號代表你詳閱並同意 Coshift
+          <nuxt-link to="/">使用條款</nuxt-link> 與
+          <nuxt-link to="/">資料使用政策</nuxt-link>
+        </p>
+        <div class="text-center mb-8">
+          <v-btn
+            large
+            color="#46B964"
+            min-width="160"
+            type="submit"
+            :disabled="invalid"
+            >註冊</v-btn
+          >
+        </div>
       </ValidationObserver>
     </section>
   </main>
@@ -80,14 +83,23 @@ export default {
         email: '',
         password: '',
       },
-      rule: {
-        email: 'required',
-        password: 'required',
+      rules: {
+        email: 'required|email',
+        password: 'required|max:8',
       },
     }
   },
   computed: {},
-  watch: {},
+  watch: {
+    /** 監聽 validationForm 手動觸發 validate 監聽 */
+    validationForm: {
+      async handler() {
+        await this.$refs.authCode.validate()
+      },
+      deep: true,
+      immediate: false,
+    },
+  },
   mounted() {},
   beforeMount() {},
   updated() {},
