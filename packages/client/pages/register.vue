@@ -90,16 +90,7 @@ export default {
     }
   },
   computed: {},
-  watch: {
-    /** 監聽 validationForm 手動觸發 validate 監聽 */
-    validationForm: {
-      async handler() {
-        await this.$refs.authCode.validate()
-      },
-      deep: true,
-      immediate: false,
-    },
-  },
+  watch: {},
   mounted() {},
   beforeMount() {},
   updated() {},

@@ -7,7 +7,7 @@ import {
   setInteractionMode,
 } from 'vee-validate'
 
-setInteractionMode('eager')
+setInteractionMode('aggressive')
 
 extend('digits', {
   ...digits,
