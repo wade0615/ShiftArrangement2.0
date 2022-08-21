@@ -56,14 +56,15 @@
           <nuxt-link to="/">資料使用政策</nuxt-link>
         </p>
         <div class="text-center mb-8">
-          <v-btn
+          <StyledBtn
+            text="註冊中"
             large
-            color="#46B964"
+            text-color="#fff"
+            bg-color="#46B964"
             min-width="160"
             type="submit"
             :disabled="invalid"
-            >註冊</v-btn
-          >
+          ></StyledBtn>
         </div>
       </ValidationObserver>
     </section>
@@ -99,7 +100,7 @@ export default {
       /** 取得驗證是否通過，通過為 true */
       const isValid = await this.$refs.authCode.validate()
       if (isValid) {
-        this.$router.push({ name: 'Home' })
+        this.$router.push({ name: 'index' })
       }
     },
   },
