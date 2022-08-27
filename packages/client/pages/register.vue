@@ -3,8 +3,8 @@
     <h2>
       {{ title }}
     </h2>
-    <RegisterDetail v-show="showDetail" @send_otp="sendOTP" />
-    <RegisterOtp v-show="!showDetail" />
+    <RegisterDetail v-show="showDetail" @handle_otp="handleOTP" />
+    <RegisterOtp v-show="!showDetail" @handle_otp="handleOTP" />
   </main>
 </template>
 
@@ -27,7 +27,7 @@ export default {
   beforeMount() {},
   updated() {},
   methods: {
-    sendOTP() {
+    handleOTP() {
       this.showDetail = !this.showDetail
     },
   },
