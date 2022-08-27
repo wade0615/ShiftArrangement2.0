@@ -4,3 +4,5 @@ import StyledBtn from './StyledBtn.vue'
 
 Vue.component('StyledInput', StyledInput)
 Vue.component('StyledBtn', StyledBtn)
+
+export default {}
