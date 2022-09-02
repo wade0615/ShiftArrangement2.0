@@ -28,7 +28,7 @@
         </div>
         <div class="text-center mb-8">
           <StyledBtn
-            text="註冊"
+            text="下一步"
             large
             text-color="#fff"
             bg-color="#46B964"
@@ -56,7 +56,7 @@ export default {
         otpCode: '',
       },
       rules: {
-        otpCode: 'required',
+        otpCode: 'required|min:6',
       },
     }
   },

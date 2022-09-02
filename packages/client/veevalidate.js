@@ -1,5 +1,12 @@
 import Vue from 'vue'
-import { required, digits, email, max, regex } from 'vee-validate/dist/rules'
+import {
+  required,
+  digits,
+  email,
+  max,
+  min,
+  regex,
+} from 'vee-validate/dist/rules'
 import {
   extend,
   ValidationProvider,
@@ -22,6 +29,11 @@ extend('required', {
 extend('max', {
   ...max,
   message: '{_field_} may not be greater than {length} characters',
+})
+
+extend('min', {
+  ...min,
+  message: '{_field_} may not be less than {length} characters',
 })
 
 extend('regex', {
