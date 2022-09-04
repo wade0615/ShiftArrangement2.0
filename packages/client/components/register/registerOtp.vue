@@ -86,11 +86,7 @@ export default {
     }
   },
   computed: {},
-  watch: {
-    registerData() {
-      console.log('click handle')
-    },
-  },
+  watch: {},
   mounted() {
     this.timmer()
   },
