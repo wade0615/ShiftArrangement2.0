@@ -22,7 +22,7 @@
               type="number"
             ></v-otp-input>
             <span class="text-sm leading-normal"
-              >已將驗證碼寄送至 {{ email }}</span
+              >已將驗證碼寄送至 {{ registerData.email }}</span
             >
           </ValidationProvider>
         </div>
@@ -37,10 +37,24 @@
             :disabled="invalid"
           ></StyledBtn>
         </div>
-        <!-- <nuxt-link to="/register" class="col-12 col-md-6">
-          修改 email 信箱
-        </nuxt-link> -->
-        <v-btn large min-width @click="handleOtp">修改 email 信箱</v-btn>
+        <div class="text-center mb-8">
+          <p>還沒收到驗證碼嗎？</p>
+          <p v-if="countTime > 0">({{ countTime }})秒後可重新寄送</p>
+          <v-btn
+            v-else
+            text
+            color="#007AFF"
+            large
+            min-width
+            @click="resendOtp()"
+            >重新寄送驗證碼</v-btn
+          >
+        </div>
+        <div class="text-center mb-8">
+          <v-btn text color="#007AFF" large min-width @click="handleOtp()"
+            >修改 email 信箱</v-btn
+          >
+        </div>
       </ValidationObserver>
     </section>
   </div>
@@ -48,7 +62,17 @@
 
 <script>
 export default {
-  props: [],
+  props: {
+    registerData: {
+      type: Object,
+      default: () => {
+        return {
+          email: '',
+          password: '',
+        }
+      },
+    },
+  },
   data: () => {
     return {
       email: 'test@mail.com',
@@ -58,11 +82,18 @@ export default {
       rules: {
         otpCode: 'required|min:6',
       },
+      countTime: 60,
     }
   },
   computed: {},
-  watch: {},
-  mounted() {},
+  watch: {
+    registerData() {
+      console.log('click handle')
+    },
+  },
+  mounted() {
+    this.timmer()
+  },
   beforeMount() {},
   updated() {},
   methods: {
@@ -75,6 +106,19 @@ export default {
     },
     handleOtp() {
       this.$emit('handle_otp')
+    },
+    /** 重新寄送驗證碼 */
+    resendOtp() {
+      console.log('重新寄送驗證碼')
+    },
+    /** 重新寄送驗證碼倒計時 */
+    timmer() {
+      const nIntervId = setInterval(() => {
+        this.countTime = this.countTime - 1
+      }, 1000)
+      setTimeout(() => {
+        clearInterval(nIntervId)
+      }, 60000)
     },
   },
 }

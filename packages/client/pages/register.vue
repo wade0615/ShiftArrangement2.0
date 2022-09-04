@@ -4,7 +4,11 @@
       {{ title }}
     </h2>
     <RegisterDetail v-show="showDetail" @handle_otp="handleOTP" />
-    <RegisterOtp v-show="!showDetail" @handle_otp="handleOTP" />
+    <RegisterOtp
+      v-if="!showDetail"
+      :register-data="registerData"
+      @handle_otp="handleOTP"
+    />
   </main>
 </template>
 
@@ -19,6 +23,7 @@ export default {
     return {
       title: '店面管理員註冊',
       showDetail: true,
+      registerData: {},
     }
   },
   computed: {},
@@ -27,7 +32,10 @@ export default {
   beforeMount() {},
   updated() {},
   methods: {
-    handleOTP() {
+    handleOTP(value) {
+      if (value) {
+        this.registerData = value
+      }
       this.showDetail = !this.showDetail
     },
   },

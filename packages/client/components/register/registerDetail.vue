@@ -81,7 +81,7 @@ export default {
       },
       rules: {
         email: 'required|email',
-        password: 'required|max:8',
+        password: 'required|max:20',
       },
     }
   },
@@ -95,7 +95,7 @@ export default {
       /** 取得驗證是否通過，通過為 true */
       const isValid = await this.$refs.authCode.validate()
       if (isValid) {
-        this.$emit('handle_otp')
+        this.$emit('handle_otp', this.validationForm)
       }
     },
   },
