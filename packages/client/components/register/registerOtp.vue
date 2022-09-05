@@ -1,5 +1,5 @@
 <template>
-  <div id="registerOtp">
+  <div id="register-otp">
     <section>
       <ValidationObserver
         v-slot="{ invalid }"
@@ -97,7 +97,7 @@ export default {
       /** 取得驗證是否通過，通過為 true */
       const isValid = await this.$refs.authCode.validate()
       if (isValid) {
-        this.$emit('handle_otp')
+        this.$router.push({ name: 'main-registerDone' })
       }
     },
     handleOtp() {

@@ -1,5 +1,5 @@
 <template>
-  <div id="RegisterDetail">
+  <div id="register-detail">
     <section class="mb-6">
       <p>
         <span>營業單位</span>
@@ -103,7 +103,7 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-#RegisterDetail
+#register-detail
   section:nth-child(1)
     padding: 12px
     background: #F8F8F8

@@ -6,6 +6,7 @@
       :min-width="minWidth"
       :type="type"
       :disabled="disabled"
+      :to="to"
       >{{ text }}</v-btn
     >
   </div>
@@ -42,6 +43,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    to: {
+      type: String,
+      default: '',
+    },
   },
   data: () => {
     return {}
@@ -63,6 +68,6 @@ export default {
 
 <style lang="sass" scoped>
 .styled-btn
-  button.v-btn
+  button.v-btn, a.v-btn
     color: var(--color)
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <main id="main-register" data-app>
+  <main id="main-register" class="px-4 py-8" data-app>
     <h2>
       {{ title }}
     </h2>
@@ -81,7 +81,6 @@ export default {
 <style lang="sass" scoped>
 #main-register
   min-height: calc(100vh - 56px)
-  padding: 32px 16px
   h2
     font-weight: 500
     font-size: 20px
