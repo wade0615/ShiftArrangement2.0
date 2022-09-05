@@ -1,11 +1,11 @@
 <template>
-  <div>Sample</div>
+  <div id="stores">Stores</div>
 </template>
 
 <script>
 export default {
-  name: 'Sample',
-  layout: 'default',
+  name: 'Stores',
+  layout: 'main',
   props: [],
   data: () => {
     return {}

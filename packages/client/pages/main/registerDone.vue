@@ -18,7 +18,7 @@
       text-color="#fff"
       bg-color="#46B964"
       min-width="160"
-      to="/"
+      to="/main/Stores"
     ></StyledBtn>
   </main>
 </template>

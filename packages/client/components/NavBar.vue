@@ -52,7 +52,7 @@ export default {
         label: '員工管理',
       },
       {
-        route: '/',
+        route: '/main/Stores',
         label: '店面管理',
       },
       {
