@@ -1,5 +1,8 @@
 <template>
-  <div id="stores">Stores</div>
+  <div id="stores" data-app>
+    <p @click="handleDialog">Stores</p>
+    <StyledDialog :value="value" @handleDialog="handleDialog" />
+  </div>
 </template>
 
 <script>
@@ -8,14 +11,21 @@ export default {
   layout: 'main',
   props: [],
   data: () => {
-    return {}
+    return {
+      value: false,
+    }
   },
   computed: {},
   watch: {},
   mounted() {},
   beforeMount() {},
   updated() {},
-  methods: {},
+  methods: {
+    handleDialog() {
+      this.value = !this.value
+      console.log('handleDialog', this.value)
+    },
+  },
 }
 </script>
 
