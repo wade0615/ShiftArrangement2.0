@@ -1,8 +1,9 @@
 <template>
-  <section>
-    <v-app-bar color="deep-purple accent-4" dark>
+  <section id="nav-bar">
+    <v-app-bar>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>{{ title }}</v-toolbar-title>
+      <span></span>
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" absolute temporary>
       <v-list nav dense>
@@ -73,4 +74,12 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped></style>
+<style lang="sass" scoped>
+#nav-bar::v-deep
+  header
+    .v-toolbar__content
+      justify-content: space-between
+    span
+      width: 48px
+      color: $mainColor
+</style>

@@ -19,10 +19,14 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: ['@/assets/css/theme.sass'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/veevalidate', '~plugins/styledCom/index.js'],
+  plugins: [
+    '~/veevalidate',
+    '~plugins/styledCom/index.js',
+    { src: '~plugins/vuetify.js', ssr: false },
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -34,6 +38,7 @@ export default {
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
     '@nuxtjs/vuetify',
+    '@nuxtjs/style-resources',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -62,5 +67,9 @@ export default {
       secure: false,
       pathRewrite: { '^/api/': '' },
     },
+  },
+
+  styleResources: {
+    sass: ['./assets/css/*.sass'],
   },
 }
