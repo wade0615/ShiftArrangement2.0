@@ -1,7 +1,11 @@
 <template>
   <div id="stores" data-app>
     <p @click="handleDialog">Stores</p>
-    <StyledDialog :value="value" @handleDialog="handleDialog" />
+    <StyledDialog
+      :value="value"
+      title="diolog title"
+      @handleDialog="handleDialog"
+    />
   </div>
 </template>
 
@@ -23,7 +27,6 @@ export default {
   methods: {
     handleDialog() {
       this.value = !this.value
-      console.log('handleDialog', this.value)
     },
   },
 }
