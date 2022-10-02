@@ -18,7 +18,7 @@
       text-color="#fff"
       bg-color="#46B964"
       min-width="160"
-      to="/main/Stores"
+      to="/main/store/AddStore"
     ></StyledBtn>
   </main>
 </template>

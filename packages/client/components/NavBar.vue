@@ -53,7 +53,7 @@ export default {
         label: '員工管理',
       },
       {
-        route: '/main/Stores',
+        route: '/main/store/StoreList',
         label: '店面管理',
       },
       {
@@ -77,6 +77,7 @@ export default {
 <style lang="sass" scoped>
 #nav-bar::v-deep
   header
+    background-color: $white
     .v-toolbar__content
       justify-content: space-between
     span
