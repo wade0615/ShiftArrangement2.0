@@ -10,12 +10,6 @@
         <div class="mb-8">
           <ValidationProvider ref="email" :rules="rules.otpCode">
             <p class="mb-2">驗證碼*</p>
-            <!-- <StyledInput
-            v-model="validationForm.otpCode"
-            placeholder="請輸入您的 otpCode "
-            cssclass="mb-2"
-            required
-          /> -->
             <v-otp-input
               v-model="validationForm.otpCode"
               length="6"
@@ -39,7 +33,9 @@
         </div>
         <div class="text-center mb-8">
           <p>還沒收到驗證碼嗎？</p>
-          <p v-if="countTime > 0">({{ countTime }})秒後可重新寄送</p>
+          <p v-if="countTime > 0" @click="resendOtp()">
+            ({{ countTime }})秒後可重新寄送
+          </p>
           <v-btn
             v-else
             text
@@ -57,6 +53,12 @@
         </div>
       </ValidationObserver>
     </section>
+    <StyledDialog
+      :value="value"
+      title="驗證信已重新寄送"
+      :text="`已將驗證信寄送至 ${registerData.email}`"
+      @handleDialog="handleDialog"
+    />
   </div>
 </template>
 
@@ -75,6 +77,7 @@ export default {
   },
   data: () => {
     return {
+      value: false,
       email: 'test@mail.com',
       validationForm: {
         otpCode: '',
@@ -106,6 +109,7 @@ export default {
     /** 重新寄送驗證碼 */
     resendOtp() {
       console.log('重新寄送驗證碼')
+      this.value = !this.value
     },
     /** 重新寄送驗證碼倒計時 */
     timmer() {
@@ -115,6 +119,9 @@ export default {
       setTimeout(() => {
         clearInterval(nIntervId)
       }, 60000)
+    },
+    handleDialog() {
+      this.value = !this.value
     },
   },
 }

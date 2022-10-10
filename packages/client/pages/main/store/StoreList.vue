@@ -2,7 +2,9 @@
   <main id="stores" class="px-4 py-8" data-app>
     <section class="flex justify-between mb-3">
       <h2 @click="handleDialog">店面管理</h2>
-      <nuxt-link to="/main/store/AddStore" class=""> 新增店面 </nuxt-link>
+      <nuxt-link to="/main/store/AddStore" class="text-link">
+        新增店面
+      </nuxt-link>
     </section>
     <section>
       <div
@@ -74,10 +76,6 @@ export default {
 
 <style lang="sass" scoped>
 #stores
-  // section
-  //   display: flex
-  //   justify-content: space-between
-  //   align-items: center
   h2
     flex: 0 1 auto
     font-weight: 500

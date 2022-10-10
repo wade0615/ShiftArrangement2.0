@@ -14,11 +14,20 @@
             <v-icon>mdi-close</v-icon>
           </v-btn></v-card-title
         >
-        <v-card-text>
+        <v-card-text class="text-center">
           {{ text }}
         </v-card-text>
-        <v-card-actions>
-          <v-btn color="primary" text @click="handleDialog()"> Close </v-btn>
+        <v-card-actions class="justify-center gap-4">
+          <v-btn
+            v-if="isCancelBtn"
+            outlined
+            class="cancel-btn"
+            @click="handleDialog()"
+            >{{ cancelText }}
+          </v-btn>
+          <v-btn class="confirm-btn" @click="handleDialog()"
+            >{{ confirmText }}
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -41,6 +50,18 @@ export default {
     text: {
       type: [String],
       default: 'text',
+    },
+    isCancelBtn: {
+      type: [Boolean],
+      default: false,
+    },
+    confirmText: {
+      type: [String],
+      default: '好',
+    },
+    cancelText: {
+      type: [String],
+      default: '取消',
     },
   },
   data: () => {
@@ -65,4 +86,22 @@ export default {
 .styled-dialog
   .diolog-title
     justify-content: space-between
+  .v-card
+    .v-card__text
+      color: $textPrimary
+      font-weight: 400
+      font-size: 1rem
+      line-height: 1.5
+    .v-card__actions
+      padding-bottom: 2rem
+      button.cancel-btn
+        padding: 0.5rem
+        min-width: 160px
+        color: $mainColor
+        background-color: $white
+      button.confirm-btn
+        padding: 0.5rem
+        min-width: 160px
+        background-color: $mainColor
+        color: $white
 </style>
