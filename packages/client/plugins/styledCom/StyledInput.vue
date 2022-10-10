@@ -13,6 +13,24 @@
       :hint="hint"
       persistent-hint
     ></v-select>
+    <!-- chipsSelect -->
+    <v-select
+      v-if="type === 'chipsSelect'"
+      :value="value"
+      :items="selectOptions"
+      label="Select"
+      :placeholder="placeholder"
+      :required="required"
+      item-text="label"
+      item-value="value"
+      multiple
+      outlined
+      solo
+      chips
+      :hint="hint"
+      persistent-hint
+      @input="handleInput"
+    ></v-select>
     <!-- password -->
     <v-text-field
       v-if="type === 'password'"
@@ -31,7 +49,7 @@
     ></v-text-field>
     <!-- text input -->
     <v-text-field
-      v-else
+      v-if="type === 'input'"
       :value="value"
       :placeholder="placeholder"
       :required="required"
