@@ -22,10 +22,26 @@
           v-model="validationForm.publicHoliday"
           type="chipsSelect"
           placeholder="請輸入店面公休日"
-          :select-options="options"
+          :select-options="dayOptions"
           cssclass="mb-2"
           required
         />
+      </ValidationProvider>
+      <ValidationProvider
+        ref="separateFrontAndBack"
+        :rules="rules.separateFrontAndBack"
+      >
+        <section class="flex justify-between items-center">
+          <p class="mb-2">店內有無分內外場*</p>
+          <StyledInput
+            v-model="validationForm.separateFrontAndBack"
+            type="radio"
+            :radio-options="radioOptions"
+            radio-direction="row"
+            cssclass="mb-2"
+            required
+          />
+        </section>
       </ValidationProvider>
       <div class="text-center mb-8">
         <StyledBtn
@@ -52,12 +68,14 @@ export default {
       validationForm: {
         storeName: '',
         publicHoliday: '',
+        separateFrontAndBack: 'false',
       },
       rules: {
         storeName: 'required|max:30',
         publicHoliday: '',
+        separateFrontAndBack: '',
       },
-      options: [
+      dayOptions: [
         {
           label: '星期一',
           value: 'Mon',
@@ -69,6 +87,16 @@ export default {
         {
           label: '星期三',
           value: 'Wed',
+        },
+      ],
+      radioOptions: [
+        {
+          label: '有',
+          value: 'true',
+        },
+        {
+          label: '沒有',
+          value: 'false',
         },
       ],
     }

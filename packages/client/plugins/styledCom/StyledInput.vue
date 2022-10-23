@@ -60,6 +60,22 @@
       persistent-hint
       @input="handleInput"
     ></v-text-field>
+    <!-- radio -->
+    <v-radio-group
+      v-if="type === 'radio'"
+      :value="value"
+      :required="required"
+      :column="radioDirection === 'column' ? 'column' : null"
+      :row="radioDirection === 'row' ? 'row' : null"
+      @change="handleInput"
+    >
+      <v-radio
+        v-for="(option, index) in radioOptions"
+        :key="index + 'radio'"
+        :label="option.label"
+        :value="option.value"
+      ></v-radio>
+    </v-radio-group>
   </div>
 </template>
 
@@ -97,6 +113,23 @@ export default {
       type: String,
       default: '',
     },
+    radioOptions: {
+      type: Array,
+      default: () => [
+        {
+          label: '選項一',
+          value: 'true',
+        },
+        {
+          label: '選項二',
+          value: 'false',
+        },
+      ],
+    },
+    radioDirection: {
+      type: String,
+      default: 'row',
+    },
   },
   data: () => {
     return {
@@ -111,6 +144,9 @@ export default {
   methods: {
     handleInput(value) {
       this.$emit('input', value)
+    },
+    handleChange(value) {
+      this.$emit('change', value)
     },
   },
 }
