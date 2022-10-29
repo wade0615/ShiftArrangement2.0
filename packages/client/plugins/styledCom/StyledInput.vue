@@ -26,7 +26,9 @@
       multiple
       outlined
       solo
+      flat
       chips
+      dense
       :hint="hint"
       persistent-hint
       @input="handleInput"

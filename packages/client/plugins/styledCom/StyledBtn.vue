@@ -5,8 +5,10 @@
       :color="bgColor"
       :min-width="minWidth"
       :type="type"
+      :elevation="elevation"
       :disabled="disabled"
       :to="to"
+      @click="onClick"
       >{{ text }}</v-btn
     >
   </div>
@@ -47,6 +49,10 @@ export default {
       type: String,
       default: '',
     },
+    elevation: {
+      type: String,
+      default: '2',
+    },
   },
   data: () => {
     return {}
@@ -62,7 +68,11 @@ export default {
   mounted() {},
   beforeMount() {},
   updated() {},
-  methods: {},
+  methods: {
+    onClick() {
+      this.$emit('click')
+    },
+  },
 }
 </script>
 
