@@ -14,9 +14,10 @@
             <v-icon>mdi-close</v-icon>
           </v-btn></v-card-title
         >
-        <v-card-text class="text-center">
+        <v-card-text v-if="text" class="text-center">
           {{ text }}
         </v-card-text>
+        <slot v-else></slot>
         <v-card-actions class="justify-center gap-4">
           <v-btn
             v-if="isCancelBtn"
@@ -49,7 +50,7 @@ export default {
     },
     text: {
       type: [String],
-      default: 'text',
+      default: '',
     },
     isCancelBtn: {
       type: [Boolean],

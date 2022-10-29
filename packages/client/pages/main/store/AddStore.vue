@@ -101,6 +101,13 @@
             </v-tab-item>
           </v-tabs-items>
         </v-card>
+        <StyledDialog
+          :value="activeDialog"
+          title="新增班別"
+          confirm-text="新增"
+          @handleDialog="handleDialog"
+          >安安</StyledDialog
+        >
       </section>
     </ValidationObserver>
   </main>
@@ -162,6 +169,7 @@ export default {
       ],
       pageOne: true,
       tab: null,
+      activeDialog: false,
     }
   },
   computed: {},
@@ -180,6 +188,10 @@ export default {
     },
     addShift() {
       console.log('addShift')
+      this.handleDialog()
+    },
+    handleDialog() {
+      this.activeDialog = !this.activeDialog
     },
   },
 }
