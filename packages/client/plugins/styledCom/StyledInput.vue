@@ -78,12 +78,24 @@
         :value="option.value"
       ></v-radio>
     </v-radio-group>
+    <!-- timePicker -->
+    <TimePicker
+      v-if="type === 'timePicker'"
+      :time="value"
+      :placeholder="placeholder"
+      :required="required"
+      :hint="hint"
+      @input="handleInput"
+    />
   </div>
 </template>
 
 <script>
+import TimePicker from './TimePicker'
+
 export default {
   name: 'StyledInput',
+  components: { TimePicker },
   props: {
     cssclass: {
       type: String,

@@ -106,16 +106,20 @@
           title="新增班別"
           confirm-text="新增"
           @handleDialog="handleDialog"
-          >安安</StyledDialog
         >
+          <AddStoreShift @onchange="addNewShift" />
+        </StyledDialog>
       </section>
     </ValidationObserver>
   </main>
 </template>
 
 <script>
+import AddStoreShift from '@/pages/main/store/AddStoreShift'
+
 export default {
   name: 'AddStore',
+  components: { AddStoreShift },
   layout: 'main',
   props: [],
   data: () => {
@@ -167,7 +171,7 @@ export default {
         { label: '六', value: 'Sat', shifts: [] },
         { label: '日', value: 'Sun', shifts: [] },
       ],
-      pageOne: true,
+      pageOne: false,
       tab: null,
       activeDialog: false,
     }
@@ -187,11 +191,14 @@ export default {
       }
     },
     addShift() {
-      console.log('addShift')
       this.handleDialog()
     },
     handleDialog() {
       this.activeDialog = !this.activeDialog
+    },
+    addNewShift(values) {
+      console.log('addNewShift', values)
+      // TODO 推進外面的 form 裡
     },
   },
 }
