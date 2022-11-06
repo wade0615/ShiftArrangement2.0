@@ -1,13 +1,13 @@
 <template>
-  <v-dialog ref="dialog" v-model="modal" persistent width="290px">
+  <v-dialog ref="time-picker-dialog" v-model="modal" persistent width="290px">
     <!-- :return-value.sync="time" -->
     <template #activator="{ attrs, on }">
       <v-text-field
-        :time="time"
+        :value="time"
         :placeholder="placeholder"
         :required="required"
-        label="Picker in dialog"
-        prepend-icon="mdi-clock-time-four-outline"
+        label=""
+        append-icon="mdi-clock-time-four-outline"
         readonly
         outlined
         background-color="#FFF"
@@ -19,10 +19,18 @@
         @input="handleInput"
       ></v-text-field>
     </template>
-    <v-time-picker v-if="modal" :time="time" full-width @input="handleInput">
+    <v-time-picker
+      v-if="modal"
+      :value="time"
+      full-width
+      format="24hr"
+      @input="handleInput"
+    >
       <v-spacer></v-spacer>
-      <v-btn text color="primary" @click="modal = false"> Cancel </v-btn>
-      <v-btn text color="primary" @click="$refs.dialog.save(time)"> OK </v-btn>
+      <v-btn text @click="modal = false"> 取消 </v-btn>
+      <v-btn text @click="$refs.time - picker - dialog.save(time)">
+        確定
+      </v-btn>
     </v-time-picker>
   </v-dialog>
 </template>
