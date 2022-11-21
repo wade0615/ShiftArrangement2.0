@@ -15,7 +15,30 @@
           required
         />
         <p class="mb-2">班別時段*</p>
-        <StyledInput v-model="validationForm.startTime" type="timePicker" />
+        <div class="flex gap-4">
+          <StyledInput
+            v-model="validationForm.startTime"
+            type="timePicker"
+            placeholder="開始時間"
+          />
+          <StyledInput
+            v-model="validationForm.endTime"
+            type="timePicker"
+            placeholder="結束時間"
+          />
+        </div>
+        <p class="mb-2">班別配置*</p>
+        <StyledInput
+          v-model="validationForm.configuration"
+          type="checkbox"
+          :checkbox-options="checkboxOptions"
+        />
+        <p class="mb-2">複製此班別至其他工作日</p>
+        <StyledInput
+          v-model="validationForm.copyShift"
+          type="checkbox"
+          :checkbox-options="copyShiftOptions"
+        />
       </ValidationProvider>
     </ValidationObserver>
   </div>
@@ -31,10 +54,33 @@ export default {
       validationForm: {
         shiftName: '',
         startTime: '',
+        endTime: '',
+        configuration: [],
+        copyShift: [],
       },
       rules: {
         shiftName: 'required|max:30',
       },
+      checkboxOptions: [
+        {
+          label: '早班',
+          value: 'morning',
+        },
+        {
+          label: '晚班',
+          value: 'afternoon',
+        },
+      ],
+      copyShiftOptions: [
+        {
+          label: '週二',
+          value: 'tue',
+        },
+        {
+          label: '週三',
+          value: 'wed',
+        },
+      ],
     }
   },
   computed: {},

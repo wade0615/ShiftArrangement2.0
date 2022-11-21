@@ -1,5 +1,5 @@
 <template>
-  <v-dialog ref="time-picker-dialog" v-model="modal" persistent width="290px">
+  <v-dialog ref="timePickerDialog" v-model="modal" persistent width="290px">
     <!-- :return-value.sync="time" -->
     <template #activator="{ attrs, on }">
       <v-text-field
@@ -28,9 +28,7 @@
     >
       <v-spacer></v-spacer>
       <v-btn text @click="modal = false"> 取消 </v-btn>
-      <v-btn text @click="$refs.time - picker - dialog.save(time)">
-        確定
-      </v-btn>
+      <v-btn text @click="$refs.timePickerDialog.save(time)"> 確定 </v-btn>
     </v-time-picker>
   </v-dialog>
 </template>

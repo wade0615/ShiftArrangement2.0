@@ -93,7 +93,6 @@
                     min-width="160"
                     type="button"
                     elevation="0"
-                    :disabled="invalid"
                     @click="addShift()"
                   ></StyledBtn>
                 </div>

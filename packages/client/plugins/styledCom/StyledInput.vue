@@ -87,6 +87,17 @@
       :hint="hint"
       @input="handleInput"
     />
+    <!-- checkbox -->
+    <div v-if="type === 'checkbox'" class="flex gap-8">
+      <v-checkbox
+        v-for="(option, index) in checkboxOptions"
+        :key="index + 'checkbox'"
+        :label="option.label"
+        :value="option.value"
+        :input-value="value"
+        @change="handleInput"
+      />
+    </div>
   </div>
 </template>
 
@@ -143,6 +154,19 @@ export default {
     radioDirection: {
       type: String,
       default: 'row',
+    },
+    checkboxOptions: {
+      type: Array,
+      default: () => [
+        {
+          label: '選項一',
+          value: 'true',
+        },
+        {
+          label: '選項二',
+          value: 'false',
+        },
+      ],
     },
   },
   data: () => {
