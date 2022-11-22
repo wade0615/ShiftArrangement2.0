@@ -26,7 +26,9 @@
       multiple
       outlined
       solo
+      flat
       chips
+      dense
       :hint="hint"
       persistent-hint
       @input="handleInput"
@@ -76,12 +78,35 @@
         :value="option.value"
       ></v-radio>
     </v-radio-group>
+    <!-- timePicker -->
+    <TimePicker
+      v-if="type === 'timePicker'"
+      :time="value"
+      :placeholder="placeholder"
+      :required="required"
+      :hint="hint"
+      @input="handleInput"
+    />
+    <!-- checkbox -->
+    <div v-if="type === 'checkbox'" class="flex gap-8">
+      <v-checkbox
+        v-for="(option, index) in checkboxOptions"
+        :key="index + 'checkbox'"
+        :label="option.label"
+        :value="option.value"
+        :input-value="value"
+        @change="handleInput"
+      />
+    </div>
   </div>
 </template>
 
 <script>
+import TimePicker from './TimePicker'
+
 export default {
   name: 'StyledInput',
+  components: { TimePicker },
   props: {
     cssclass: {
       type: String,
@@ -129,6 +154,19 @@ export default {
     radioDirection: {
       type: String,
       default: 'row',
+    },
+    checkboxOptions: {
+      type: Array,
+      default: () => [
+        {
+          label: '選項一',
+          value: 'true',
+        },
+        {
+          label: '選項二',
+          value: 'false',
+        },
+      ],
     },
   },
   data: () => {

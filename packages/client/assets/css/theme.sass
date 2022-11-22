@@ -6,6 +6,9 @@ $textSecondary: #757575
 $textTertiary: #B1B1B1
 $textLink: #007AFF
 
+$bgWhite: #fff
+$bgLightGray: #F8F8F8
+
 .main-color
   color: $mainColor
 .text-primary
@@ -16,3 +19,14 @@ $textLink: #007AFF
   color: $textTertiary
 .text-link
   color: $textLink
+.bg-light-gray
+  background-color: $bgLightGray
+
+// reset css
+
+// timePicker
+.v-picker__title,
+.v-time-picker-clock__hand,
+.v-time-picker-clock__hand:before,
+.v-time-picker-clock__item--active
+  background-color: $mainColor
