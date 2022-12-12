@@ -1,5 +1,5 @@
 <template>
-  <div class="styled-btn" :style="cssProps">
+  <div class="styled-btn text-center" :style="cssProps">
     <v-btn
       :large="large"
       :color="bgColor"

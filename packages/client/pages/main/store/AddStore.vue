@@ -59,7 +59,7 @@
       </section>
       <!-- 第二步 -->
       <section v-else>
-        <v-card elevation="2" class="p-3">
+        <v-card elevation="2" class="p-3 mb-8">
           <p class="mb-2">設定店面班別</p>
           <v-tabs v-model="tab" fixed-tabs>
             <v-tabs-slider color="#46B964"></v-tabs-slider>
@@ -100,13 +100,21 @@
             </v-tab-item>
           </v-tabs-items>
         </v-card>
+        <StyledBtn
+          text="建立完成"
+          text-color="#fff"
+          bg-color="#46B964"
+          min-width="160"
+          type="submit"
+          elevation="0"
+        ></StyledBtn>
         <StyledDialog
           :value="activeDialog"
           title="新增班別"
           confirm-text="新增"
-          @handleDialog="handleDialog"
+          :hide-default-btn="true"
         >
-          <AddStoreShift @onchange="addNewShift" />
+          <AddStoreShift @onSubmit="addNewShift" />
         </StyledDialog>
       </section>
     </ValidationObserver>
@@ -127,6 +135,7 @@ export default {
         storeName: '',
         publicHoliday: [],
         separateFrontAndBack: 'false',
+        shifts: [],
       },
       rules: {
         storeName: 'required|max:30',
@@ -170,7 +179,7 @@ export default {
         { label: '六', value: 'Sat', shifts: [] },
         { label: '日', value: 'Sun', shifts: [] },
       ],
-      pageOne: false,
+      pageOne: true,
       tab: null,
       activeDialog: false,
     }
@@ -196,8 +205,10 @@ export default {
       this.activeDialog = !this.activeDialog
     },
     addNewShift(values) {
-      console.log('addNewShift', values)
+      this.activeDialog = !this.activeDialog
+      console.log('addNewShift', this.tab, values)
       // TODO 推進外面的 form 裡
+      this.validationForm.shifts.splice(this.tab, 0, values)
     },
   },
 }

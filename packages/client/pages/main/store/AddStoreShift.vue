@@ -1,5 +1,5 @@
 <template>
-  <div id="add-store-shift" class="p-8">
+  <div id="add-store-shift" class="p-4">
     <ValidationObserver
       v-slot="{}"
       ref="addStore"
@@ -10,7 +10,7 @@
         <p class="mb-2">班別名稱*</p>
         <StyledInput
           v-model="validationForm.shiftName"
-          placeholder="請輸入店面名稱"
+          placeholder="請輸入班別名稱"
           cssclass="mb-2"
           required
         />
@@ -39,6 +39,14 @@
           type="checkbox"
           :checkbox-options="copyShiftOptions"
         />
+        <StyledBtn
+          text="新增"
+          text-color="#fff"
+          bg-color="#46B964"
+          min-width="160"
+          type="submit"
+          elevation="0"
+        ></StyledBtn>
       </ValidationProvider>
     </ValidationObserver>
   </div>
@@ -95,7 +103,15 @@ export default {
   mounted() {},
   beforeMount() {},
   updated() {},
-  methods: {},
+  methods: {
+    async submit() {
+      /** 取得驗證是否通過，通過為 true */
+      const isValid = await this.$refs.addStore.validate()
+      if (isValid) {
+        this.$emit('onSubmit', this.validationForm)
+      }
+    },
+  },
 }
 </script>
 

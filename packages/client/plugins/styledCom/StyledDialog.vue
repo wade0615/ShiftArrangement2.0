@@ -18,7 +18,7 @@
           {{ text }}
         </v-card-text>
         <slot v-else></slot>
-        <v-card-actions class="justify-center gap-4">
+        <v-card-actions v-if="!hideDefaultBtn" class="justify-center gap-4">
           <v-btn
             v-if="isCancelBtn"
             outlined
@@ -63,6 +63,10 @@ export default {
     cancelText: {
       type: [String],
       default: '取消',
+    },
+    hideDefaultBtn: {
+      type: [Boolean],
+      default: false,
     },
   },
   data: () => {
