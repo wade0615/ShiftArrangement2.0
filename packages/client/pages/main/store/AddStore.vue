@@ -68,18 +68,21 @@
             </v-tab>
           </v-tabs>
           <v-tabs-items v-model="tab">
-            <v-tab-item v-for="weekDay in weekDayOptions" :key="weekDay.value">
+            <v-tab-item
+              v-for="(weekDay, weekDayIndex) in validationForm.weekDayShifts"
+              :key="'weekDayShifts' + weekDayIndex"
+            >
               <v-card flat>
                 <div
-                  v-if="validationForm.publicHoliday.includes(weekDay.value)"
+                  v-if="validationForm.publicHoliday.includes(weekDayIndex)"
                   class="py-2.5 text-center"
                 >
                   您已將本日設為公休日
                 </div>
                 <div
                   v-if="
-                    weekDay.shifts.length === 0 &&
-                    !validationForm.publicHoliday.includes(weekDay.value)
+                    weekDay?.length === 0 &&
+                    !validationForm.publicHoliday.includes(weekDayIndex)
                   "
                   class="py-2.5 text-center"
                 >
@@ -95,6 +98,16 @@
                     elevation="0"
                     @click="addShift()"
                   ></StyledBtn>
+                </div>
+                <div v-if="weekDay?.length !== 0">
+                  <v-card-text class="bg-light-gray">
+                    <div
+                      v-for="(shifts, shiftsIndex) in weekDay"
+                      :key="'shifts' + shiftsIndex"
+                    >
+                      {{ shifts.shiftName }}
+                    </div>
+                  </v-card-text>
                 </div>
               </v-card>
             </v-tab-item>
@@ -135,7 +148,7 @@ export default {
         storeName: '',
         publicHoliday: [],
         separateFrontAndBack: 'false',
-        shifts: [],
+        weekDayShifts: [[], [], [], [], [], [], []],
       },
       rules: {
         storeName: 'required|max:30',
@@ -149,15 +162,31 @@ export default {
         },
         {
           label: '星期一',
-          value: 'Mon',
+          value: 0,
         },
         {
           label: '星期二',
-          value: 'Tue',
+          value: 1,
         },
         {
           label: '星期三',
-          value: 'Wed',
+          value: 2,
+        },
+        {
+          label: '星期四',
+          value: 3,
+        },
+        {
+          label: '星期五',
+          value: 4,
+        },
+        {
+          label: '星期六',
+          value: 5,
+        },
+        {
+          label: '星期日',
+          value: 6,
         },
       ],
       radioOptions: [
@@ -171,13 +200,13 @@ export default {
         },
       ],
       weekDayOptions: [
-        { label: '一', value: 'Mon', shifts: [] },
-        { label: '二', value: 'Tue', shifts: [] },
-        { label: '三', value: 'Wed', shifts: [] },
-        { label: '四', value: 'Thu', shifts: [] },
-        { label: '五', value: 'Fri', shifts: [] },
-        { label: '六', value: 'Sat', shifts: [] },
-        { label: '日', value: 'Sun', shifts: [] },
+        { label: '一', value: 0 },
+        { label: '二', value: 1 },
+        { label: '三', value: 2 },
+        { label: '四', value: 3 },
+        { label: '五', value: 4 },
+        { label: '六', value: 5 },
+        { label: '日', value: 6 },
       ],
       pageOne: true,
       tab: null,
@@ -208,7 +237,8 @@ export default {
       this.activeDialog = !this.activeDialog
       console.log('addNewShift', this.tab, values)
       // TODO 推進外面的 form 裡
-      this.validationForm.shifts.splice(this.tab, 0, values)
+      this.validationForm.weekDayShifts[this.tab].push(values)
+      console.log(this.validationForm)
     },
   },
 }
