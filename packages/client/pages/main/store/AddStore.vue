@@ -104,10 +104,29 @@
                     <div
                       v-for="(shifts, shiftsIndex) in weekDay"
                       :key="'shifts' + shiftsIndex"
+                      class="shift-card"
                     >
-                      {{ shifts.shiftName }}
+                      <h6>
+                        {{ shifts.shiftName }}
+                      </h6>
+                      <span>
+                        {{ shifts.startTime }} ~ {{ shifts.endTime }}
+                      </span>
+                      <span v-if="shifts.configuration === 'morning'">
+                        早
+                      </span>
+                      <span v-else> 晚 </span>
                     </div>
                   </v-card-text>
+                  <StyledBtn
+                    text="新增班別"
+                    text-color="#46B964"
+                    bg-color="#fff"
+                    min-width="160"
+                    type="button"
+                    elevation="0"
+                    @click="addShift()"
+                  ></StyledBtn>
                 </div>
               </v-card>
             </v-tab-item>
@@ -126,8 +145,13 @@
           title="新增班別"
           confirm-text="新增"
           :hide-default-btn="true"
+          @handleDialog="handleDialog"
         >
-          <AddStoreShift @onSubmit="addNewShift" />
+          <AddStoreShift
+            v-if="activeDialog"
+            :store-info="validationForm"
+            @onSubmit="addNewShift"
+          />
         </StyledDialog>
       </section>
     </ValidationObserver>
@@ -147,7 +171,7 @@ export default {
       validationForm: {
         storeName: '',
         publicHoliday: [],
-        separateFrontAndBack: 'false',
+        separateFrontAndBack: false,
         weekDayShifts: [[], [], [], [], [], [], []],
       },
       rules: {
@@ -192,11 +216,11 @@ export default {
       radioOptions: [
         {
           label: '有',
-          value: 'true',
+          value: true,
         },
         {
           label: '沒有',
-          value: 'false',
+          value: false,
         },
       ],
       weekDayOptions: [
@@ -254,4 +278,10 @@ export default {
   .v-tab
     min-width: 40px
     padding: 0 0.25rem
+  .shift-card
+    padding: 12px
+    margin: 0 0 12px
+    background-color: #fff
+    box-shadow: 0px 1px 4px rgba(82, 82, 82, 0.15)
+    border-radius: 5px
 </style>

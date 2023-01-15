@@ -2,7 +2,7 @@
   <div id="add-store-shift" class="p-4">
     <ValidationObserver
       v-slot="{}"
-      ref="addStore"
+      ref="addstoreShift"
       tag="form"
       @submit.prevent="submit()"
     >
@@ -27,8 +27,9 @@
             placeholder="結束時間"
           />
         </div>
-        <p class="mb-2">班別配置*</p>
+        <p v-if="storeInfo.separateFrontAndBack" class="mb-2">班別配置*</p>
         <StyledInput
+          v-if="storeInfo.separateFrontAndBack"
           v-model="validationForm.configuration"
           type="checkbox"
           :checkbox-options="checkboxOptions"
@@ -56,18 +57,32 @@
 export default {
   name: 'AddStoreShift',
   layout: 'default',
-  props: [],
+  props: {
+    storeInfo: {
+      type: Object,
+      default: () => {
+        return {
+          storeName: '',
+          publicHoliday: [],
+          separateFrontAndBack: false,
+          weekDayShifts: [],
+        }
+      },
+    },
+  },
   data: () => {
     return {
       validationForm: {
         shiftName: '',
-        startTime: '',
-        endTime: '',
+        startTime: null,
+        endTime: null,
         configuration: [],
         copyShift: [],
       },
       rules: {
         shiftName: 'required|max:30',
+        startTime: 'required',
+        endTime: 'required',
       },
       checkboxOptions: [
         {
@@ -106,9 +121,13 @@ export default {
   methods: {
     async submit() {
       /** 取得驗證是否通過，通過為 true */
-      const isValid = await this.$refs.addStore.validate()
+      const isValid = await this.$refs.addstoreShift.validate()
       if (isValid) {
         this.$emit('onSubmit', this.validationForm)
+        // window.requestAnimationFrame(() => {
+        //   this.$refs.addStore.reset()
+        //   console.log('close')
+        // })
       }
     },
   },

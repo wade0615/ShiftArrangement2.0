@@ -117,7 +117,7 @@ export default {
       default: 'input',
     },
     value: {
-      type: [String, Number, Array],
+      type: [String, Number, Array, Boolean],
       default: '',
     },
     required: {
