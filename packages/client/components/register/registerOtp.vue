@@ -22,14 +22,14 @@
         </div>
         <div class="text-center mb-8">
           <StyledBtn
-            text="下一步"
             large
             text-color="#fff"
             bg-color="#46B964"
             min-width="160"
             type="submit"
             :disabled="invalid"
-          ></StyledBtn>
+            >下一步</StyledBtn
+          >
         </div>
         <div class="text-center mb-8">
           <p>還沒收到驗證碼嗎？</p>

@@ -47,14 +47,16 @@
         </ValidationProvider>
         <div class="text-center mb-8">
           <StyledBtn
-            text="下一步"
+            prepend-icon="mdi-thumb-up"
             large
             text-color="#fff"
             bg-color="#46B964"
             min-width="160"
             type="submit"
             :disabled="invalid"
-          ></StyledBtn>
+          >
+            下一步
+          </StyledBtn>
         </div>
       </section>
       <!-- 第二步 -->
@@ -90,14 +92,15 @@
                     您尚未添加任何班別
                   </v-card-text>
                   <StyledBtn
-                    text="新增班別"
                     text-color="#46B964"
                     bg-color="#fff"
                     min-width="160"
                     type="button"
                     elevation="0"
                     @click="addShift()"
-                  ></StyledBtn>
+                  >
+                    <v-icon light>mdi-plus</v-icon>新增班別
+                  </StyledBtn>
                 </div>
                 <div v-if="weekDay?.length !== 0">
                   <v-card-text class="bg-light-gray">
@@ -119,27 +122,37 @@
                     </div>
                   </v-card-text>
                   <StyledBtn
-                    text="新增班別"
                     text-color="#46B964"
                     bg-color="#fff"
                     min-width="160"
                     type="button"
                     elevation="0"
                     @click="addShift()"
-                  ></StyledBtn>
+                  >
+                    <v-icon light>mdi-plus</v-icon>新增班別
+                  </StyledBtn>
                 </div>
               </v-card>
             </v-tab-item>
           </v-tabs-items>
         </v-card>
         <StyledBtn
-          text="建立完成"
           text-color="#fff"
           bg-color="#46B964"
           min-width="160"
           type="submit"
           elevation="0"
-        ></StyledBtn>
+          >建立完成</StyledBtn
+        >
+        <StyledBtn
+          text-color="#46B964"
+          bg-color="#fff"
+          min-width="160"
+          type="button"
+          elevation="0"
+          @click="previousStep()"
+          >回上一步</StyledBtn
+        >
         <StyledDialog
           :value="activeDialog"
           title="新增班別"
@@ -150,6 +163,7 @@
           <AddStoreShift
             v-if="activeDialog"
             :store-info="validationForm"
+            :current-day="tab"
             @onSubmit="addNewShift"
           />
         </StyledDialog>
@@ -183,34 +197,42 @@ export default {
         {
           label: '無',
           value: 'none',
+          disabled: false,
         },
         {
           label: '星期一',
           value: 0,
+          disabled: false,
         },
         {
           label: '星期二',
           value: 1,
+          disabled: false,
         },
         {
           label: '星期三',
           value: 2,
+          disabled: false,
         },
         {
           label: '星期四',
           value: 3,
+          disabled: false,
         },
         {
           label: '星期五',
           value: 4,
+          disabled: false,
         },
         {
           label: '星期六',
           value: 5,
+          disabled: false,
         },
         {
           label: '星期日',
           value: 6,
+          disabled: false,
         },
       ],
       radioOptions: [
@@ -238,7 +260,14 @@ export default {
     }
   },
   computed: {},
-  watch: {},
+  watch: {
+    validationForm: {
+      handler(val) {
+        this.handlePublicDay(val)
+      },
+      deep: true,
+    },
+  },
   mounted() {},
   beforeMount() {},
   updated() {},
@@ -251,18 +280,60 @@ export default {
         this.pageOne = false
       }
     },
+    previousStep() {
+      this.pageOne = true
+    },
+    /** 新增班別 */
     addShift() {
       this.handleDialog()
     },
+    /** 開關新增班別視窗 */
     handleDialog() {
       this.activeDialog = !this.activeDialog
     },
+    /** 新增班別 */
     addNewShift(values) {
-      this.activeDialog = !this.activeDialog
-      console.log('addNewShift', this.tab, values)
-      // TODO 推進外面的 form 裡
+      this.handleDialog()
+      // 新增班表進指定 週天
       this.validationForm.weekDayShifts[this.tab].push(values)
-      console.log(this.validationForm)
+      // 若新增的班表有需有複製班表，執行複製動作
+      if (values.copyShift.length > 0) {
+        values.copyShift.forEach((element) => {
+          this.validationForm.weekDayShifts[element].push(values)
+        })
+      }
+    },
+    /** 設定公休日 */
+    handlePublicDay(values) {
+      if (values.publicHoliday.includes('none')) {
+        // 若有設定其他公休日，移除其他所有公休日
+        if (values.publicHoliday.filter((e) => e !== 'none').length > 0) {
+          const publicHolidayValues = this.validationForm.publicHoliday.filter(
+            (e) => e === 'none'
+          )
+          this.validationForm.publicHoliday = publicHolidayValues
+        }
+        // 將其餘選項 disabled
+        const dayOptionsResult = this.dayOptions.map((e) => {
+          if (e.value === 'none') {
+            return e
+          }
+          return {
+            ...e,
+            disabled: true,
+          }
+        })
+        this.dayOptions = dayOptionsResult
+        return
+      }
+      // 解除封印
+      const dayOptionsResult = this.dayOptions.map((e) => {
+        return {
+          ...e,
+          disabled: false,
+        }
+      })
+      this.dayOptions = dayOptionsResult
     },
   },
 }

@@ -41,13 +41,13 @@
           :checkbox-options="copyShiftOptions"
         />
         <StyledBtn
-          text="新增"
           text-color="#fff"
           bg-color="#46B964"
           min-width="160"
           type="submit"
           elevation="0"
-        ></StyledBtn>
+          >新增</StyledBtn
+        >
       </ValidationProvider>
     </ValidationObserver>
   </div>
@@ -69,6 +69,10 @@ export default {
         }
       },
     },
+    currentDay: {
+      type: Number,
+      default: 0,
+    },
   },
   data: () => {
     return {
@@ -86,22 +90,42 @@ export default {
       },
       checkboxOptions: [
         {
-          label: '早班',
-          value: 'morning',
+          label: '外場',
+          value: 'front',
         },
         {
-          label: '晚班',
-          value: 'afternoon',
+          label: '內場',
+          value: 'back',
         },
       ],
       copyShiftOptions: [
         {
+          label: '週一',
+          value: 0,
+        },
+        {
           label: '週二',
-          value: 'tue',
+          value: 1,
         },
         {
           label: '週三',
-          value: 'wed',
+          value: 2,
+        },
+        {
+          label: '週四',
+          value: 3,
+        },
+        {
+          label: '週五',
+          value: 4,
+        },
+        {
+          label: '週六',
+          value: 5,
+        },
+        {
+          label: '週日',
+          value: 6,
         },
       ],
     }
@@ -116,7 +140,9 @@ export default {
     },
   },
   mounted() {},
-  beforeMount() {},
+  beforeMount() {
+    this.setCopyShiftOptions()
+  },
   updated() {},
   methods: {
     async submit() {
@@ -129,6 +155,16 @@ export default {
         //   console.log('close')
         // })
       }
+    },
+    setCopyShiftOptions() {
+      console.log('setCopyShiftOptions', this.storeInfo.publicHoliday)
+      const copyShiftOptions = JSON.parse(JSON.stringify(this.copyShiftOptions))
+      const currentCopyDays = copyShiftOptions.filter(
+        (option, index) =>
+          !this.storeInfo.publicHoliday.includes(index) &&
+          index !== this.currentDay
+      )
+      this.copyShiftOptions = currentCopyDays
     },
   },
 }

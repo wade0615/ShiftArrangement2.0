@@ -54,14 +54,14 @@
         </p>
         <div class="text-center mb-8">
           <StyledBtn
-            text="註冊"
             large
             text-color="#fff"
             bg-color="#46B964"
             min-width="160"
             type="submit"
             :disabled="invalid"
-          ></StyledBtn>
+            >註冊</StyledBtn
+          >
         </div>
       </ValidationObserver>
     </section>
