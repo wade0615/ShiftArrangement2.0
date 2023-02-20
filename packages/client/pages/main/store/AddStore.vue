@@ -47,14 +47,16 @@
         </ValidationProvider>
         <div class="text-center mb-8">
           <StyledBtn
-            text="下一步"
+            prepend-icon="mdi-thumb-up"
             large
             text-color="#fff"
             bg-color="#46B964"
             min-width="160"
             type="submit"
             :disabled="invalid"
-          ></StyledBtn>
+          >
+            下一步
+          </StyledBtn>
         </div>
       </section>
       <!-- 第二步 -->
@@ -68,18 +70,21 @@
             </v-tab>
           </v-tabs>
           <v-tabs-items v-model="tab">
-            <v-tab-item v-for="weekDay in weekDayOptions" :key="weekDay.value">
+            <v-tab-item
+              v-for="(weekDay, weekDayIndex) in validationForm.weekDayShifts"
+              :key="'weekDayShifts' + weekDayIndex"
+            >
               <v-card flat>
                 <div
-                  v-if="validationForm.publicHoliday.includes(weekDay.value)"
+                  v-if="validationForm.publicHoliday.includes(weekDayIndex)"
                   class="py-2.5 text-center"
                 >
                   您已將本日設為公休日
                 </div>
                 <div
                   v-if="
-                    weekDay.shifts.length === 0 &&
-                    !validationForm.publicHoliday.includes(weekDay.value)
+                    weekDay?.length === 0 &&
+                    !validationForm.publicHoliday.includes(weekDayIndex)
                   "
                   class="py-2.5 text-center"
                 >
@@ -87,34 +92,80 @@
                     您尚未添加任何班別
                   </v-card-text>
                   <StyledBtn
-                    text="新增班別"
                     text-color="#46B964"
                     bg-color="#fff"
                     min-width="160"
                     type="button"
                     elevation="0"
                     @click="addShift()"
-                  ></StyledBtn>
+                  >
+                    <v-icon light>mdi-plus</v-icon>新增班別
+                  </StyledBtn>
+                </div>
+                <div v-if="weekDay?.length !== 0">
+                  <v-card-text class="bg-light-gray">
+                    <div
+                      v-for="(shifts, shiftsIndex) in weekDay"
+                      :key="'shifts' + shiftsIndex"
+                      class="shift-card"
+                    >
+                      <h6>
+                        {{ shifts.shiftName }}
+                      </h6>
+                      <span>
+                        {{ shifts.startTime }} ~ {{ shifts.endTime }}
+                      </span>
+                      <span v-if="shifts.configuration === 'morning'">
+                        早
+                      </span>
+                      <span v-else> 晚 </span>
+                    </div>
+                  </v-card-text>
+                  <StyledBtn
+                    text-color="#46B964"
+                    bg-color="#fff"
+                    min-width="160"
+                    type="button"
+                    elevation="0"
+                    @click="addShift()"
+                  >
+                    <v-icon light>mdi-plus</v-icon>新增班別
+                  </StyledBtn>
                 </div>
               </v-card>
             </v-tab-item>
           </v-tabs-items>
         </v-card>
         <StyledBtn
-          text="建立完成"
           text-color="#fff"
           bg-color="#46B964"
           min-width="160"
           type="submit"
           elevation="0"
-        ></StyledBtn>
+          >建立完成</StyledBtn
+        >
+        <StyledBtn
+          text-color="#46B964"
+          bg-color="#fff"
+          min-width="160"
+          type="button"
+          elevation="0"
+          @click="previousStep()"
+          >回上一步</StyledBtn
+        >
         <StyledDialog
           :value="activeDialog"
           title="新增班別"
           confirm-text="新增"
           :hide-default-btn="true"
+          @handleDialog="handleDialog"
         >
-          <AddStoreShift @onSubmit="addNewShift" />
+          <AddStoreShift
+            v-if="activeDialog"
+            :store-info="validationForm"
+            :current-day="tab"
+            @onSubmit="addNewShift"
+          />
         </StyledDialog>
       </section>
     </ValidationObserver>
@@ -134,8 +185,8 @@ export default {
       validationForm: {
         storeName: '',
         publicHoliday: [],
-        separateFrontAndBack: 'false',
-        shifts: [],
+        separateFrontAndBack: false,
+        weekDayShifts: [[], [], [], [], [], [], []],
       },
       rules: {
         storeName: 'required|max:30',
@@ -146,38 +197,62 @@ export default {
         {
           label: '無',
           value: 'none',
+          disabled: false,
         },
         {
           label: '星期一',
-          value: 'Mon',
+          value: 0,
+          disabled: false,
         },
         {
           label: '星期二',
-          value: 'Tue',
+          value: 1,
+          disabled: false,
         },
         {
           label: '星期三',
-          value: 'Wed',
+          value: 2,
+          disabled: false,
+        },
+        {
+          label: '星期四',
+          value: 3,
+          disabled: false,
+        },
+        {
+          label: '星期五',
+          value: 4,
+          disabled: false,
+        },
+        {
+          label: '星期六',
+          value: 5,
+          disabled: false,
+        },
+        {
+          label: '星期日',
+          value: 6,
+          disabled: false,
         },
       ],
       radioOptions: [
         {
           label: '有',
-          value: 'true',
+          value: true,
         },
         {
           label: '沒有',
-          value: 'false',
+          value: false,
         },
       ],
       weekDayOptions: [
-        { label: '一', value: 'Mon', shifts: [] },
-        { label: '二', value: 'Tue', shifts: [] },
-        { label: '三', value: 'Wed', shifts: [] },
-        { label: '四', value: 'Thu', shifts: [] },
-        { label: '五', value: 'Fri', shifts: [] },
-        { label: '六', value: 'Sat', shifts: [] },
-        { label: '日', value: 'Sun', shifts: [] },
+        { label: '一', value: 0 },
+        { label: '二', value: 1 },
+        { label: '三', value: 2 },
+        { label: '四', value: 3 },
+        { label: '五', value: 4 },
+        { label: '六', value: 5 },
+        { label: '日', value: 6 },
       ],
       pageOne: true,
       tab: null,
@@ -185,7 +260,14 @@ export default {
     }
   },
   computed: {},
-  watch: {},
+  watch: {
+    validationForm: {
+      handler(val) {
+        this.handlePublicDay(val)
+      },
+      deep: true,
+    },
+  },
   mounted() {},
   beforeMount() {},
   updated() {},
@@ -198,17 +280,60 @@ export default {
         this.pageOne = false
       }
     },
+    previousStep() {
+      this.pageOne = true
+    },
+    /** 新增班別 */
     addShift() {
       this.handleDialog()
     },
+    /** 開關新增班別視窗 */
     handleDialog() {
       this.activeDialog = !this.activeDialog
     },
+    /** 新增班別 */
     addNewShift(values) {
-      this.activeDialog = !this.activeDialog
-      console.log('addNewShift', this.tab, values)
-      // TODO 推進外面的 form 裡
-      this.validationForm.shifts.splice(this.tab, 0, values)
+      this.handleDialog()
+      // 新增班表進指定 週天
+      this.validationForm.weekDayShifts[this.tab].push(values)
+      // 若新增的班表有需有複製班表，執行複製動作
+      if (values.copyShift.length > 0) {
+        values.copyShift.forEach((element) => {
+          this.validationForm.weekDayShifts[element].push(values)
+        })
+      }
+    },
+    /** 設定公休日 */
+    handlePublicDay(values) {
+      if (values.publicHoliday.includes('none')) {
+        // 若有設定其他公休日，移除其他所有公休日
+        if (values.publicHoliday.filter((e) => e !== 'none').length > 0) {
+          const publicHolidayValues = this.validationForm.publicHoliday.filter(
+            (e) => e === 'none'
+          )
+          this.validationForm.publicHoliday = publicHolidayValues
+        }
+        // 將其餘選項 disabled
+        const dayOptionsResult = this.dayOptions.map((e) => {
+          if (e.value === 'none') {
+            return e
+          }
+          return {
+            ...e,
+            disabled: true,
+          }
+        })
+        this.dayOptions = dayOptionsResult
+        return
+      }
+      // 解除封印
+      const dayOptionsResult = this.dayOptions.map((e) => {
+        return {
+          ...e,
+          disabled: false,
+        }
+      })
+      this.dayOptions = dayOptionsResult
     },
   },
 }
@@ -224,4 +349,10 @@ export default {
   .v-tab
     min-width: 40px
     padding: 0 0.25rem
+  .shift-card
+    padding: 12px
+    margin: 0 0 12px
+    background-color: #fff
+    box-shadow: 0px 1px 4px rgba(82, 82, 82, 0.15)
+    border-radius: 5px
 </style>

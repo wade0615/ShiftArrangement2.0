@@ -13,13 +13,13 @@
       ></v-img>
     </div>
     <StyledBtn
-      text="前往新增店面"
       large
       text-color="#fff"
       bg-color="#46B964"
       min-width="160"
       to="/main/store/AddStore"
-    ></StyledBtn>
+      >前往新增店面</StyledBtn
+    >
   </main>
 </template>
 

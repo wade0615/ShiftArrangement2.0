@@ -9,8 +9,8 @@
       :disabled="disabled"
       :to="to"
       @click="onClick"
-      >{{ text }}</v-btn
-    >
+      ><slot>{{ text }}</slot>
+    </v-btn>
   </div>
 </template>
 

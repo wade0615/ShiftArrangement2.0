@@ -2,7 +2,7 @@
   <div id="add-store-shift" class="p-4">
     <ValidationObserver
       v-slot="{}"
-      ref="addStore"
+      ref="addstoreShift"
       tag="form"
       @submit.prevent="submit()"
     >
@@ -27,8 +27,9 @@
             placeholder="結束時間"
           />
         </div>
-        <p class="mb-2">班別配置*</p>
+        <p v-if="storeInfo.separateFrontAndBack" class="mb-2">班別配置*</p>
         <StyledInput
+          v-if="storeInfo.separateFrontAndBack"
           v-model="validationForm.configuration"
           type="checkbox"
           :checkbox-options="checkboxOptions"
@@ -40,13 +41,13 @@
           :checkbox-options="copyShiftOptions"
         />
         <StyledBtn
-          text="新增"
           text-color="#fff"
           bg-color="#46B964"
           min-width="160"
           type="submit"
           elevation="0"
-        ></StyledBtn>
+          >新增</StyledBtn
+        >
       </ValidationProvider>
     </ValidationObserver>
   </div>
@@ -56,37 +57,75 @@
 export default {
   name: 'AddStoreShift',
   layout: 'default',
-  props: [],
+  props: {
+    storeInfo: {
+      type: Object,
+      default: () => {
+        return {
+          storeName: '',
+          publicHoliday: [],
+          separateFrontAndBack: false,
+          weekDayShifts: [],
+        }
+      },
+    },
+    currentDay: {
+      type: Number,
+      default: 0,
+    },
+  },
   data: () => {
     return {
       validationForm: {
         shiftName: '',
-        startTime: '',
-        endTime: '',
+        startTime: null,
+        endTime: null,
         configuration: [],
         copyShift: [],
       },
       rules: {
         shiftName: 'required|max:30',
+        startTime: 'required',
+        endTime: 'required',
       },
       checkboxOptions: [
         {
-          label: '早班',
-          value: 'morning',
+          label: '外場',
+          value: 'front',
         },
         {
-          label: '晚班',
-          value: 'afternoon',
+          label: '內場',
+          value: 'back',
         },
       ],
       copyShiftOptions: [
         {
+          label: '週一',
+          value: 0,
+        },
+        {
           label: '週二',
-          value: 'tue',
+          value: 1,
         },
         {
           label: '週三',
-          value: 'wed',
+          value: 2,
+        },
+        {
+          label: '週四',
+          value: 3,
+        },
+        {
+          label: '週五',
+          value: 4,
+        },
+        {
+          label: '週六',
+          value: 5,
+        },
+        {
+          label: '週日',
+          value: 6,
         },
       ],
     }
@@ -101,15 +140,31 @@ export default {
     },
   },
   mounted() {},
-  beforeMount() {},
+  beforeMount() {
+    this.setCopyShiftOptions()
+  },
   updated() {},
   methods: {
     async submit() {
       /** 取得驗證是否通過，通過為 true */
-      const isValid = await this.$refs.addStore.validate()
+      const isValid = await this.$refs.addstoreShift.validate()
       if (isValid) {
         this.$emit('onSubmit', this.validationForm)
+        // window.requestAnimationFrame(() => {
+        //   this.$refs.addStore.reset()
+        //   console.log('close')
+        // })
       }
+    },
+    setCopyShiftOptions() {
+      console.log('setCopyShiftOptions', this.storeInfo.publicHoliday)
+      const copyShiftOptions = JSON.parse(JSON.stringify(this.copyShiftOptions))
+      const currentCopyDays = copyShiftOptions.filter(
+        (option, index) =>
+          !this.storeInfo.publicHoliday.includes(index) &&
+          index !== this.currentDay
+      )
+      this.copyShiftOptions = currentCopyDays
     },
   },
 }

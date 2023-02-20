@@ -23,6 +23,7 @@
       :required="required"
       item-text="label"
       item-value="value"
+      item-disabled="disabled"
       multiple
       outlined
       solo
@@ -88,7 +89,7 @@
       @input="handleInput"
     />
     <!-- checkbox -->
-    <div v-if="type === 'checkbox'" class="flex gap-8">
+    <div v-if="type === 'checkbox'" class="flex flex-wrap gap-x-8">
       <v-checkbox
         v-for="(option, index) in checkboxOptions"
         :key="index + 'checkbox'"
@@ -117,7 +118,7 @@ export default {
       default: 'input',
     },
     value: {
-      type: [String, Number, Array],
+      type: [String, Number, Array, Boolean],
       default: '',
     },
     required: {
