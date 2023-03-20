@@ -33,7 +33,7 @@ export default {
     group: null,
     list: [
       {
-        route: '/',
+        route: '/main/dashboard',
         label: '控制台',
       },
       {
