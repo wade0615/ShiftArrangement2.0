@@ -64,7 +64,7 @@
         <v-card elevation="2" class="p-3 mb-8">
           <p class="mb-2">設定店面班別</p>
           <v-tabs v-model="tab" fixed-tabs>
-            <v-tabs-slider color="#46B964"></v-tabs-slider>
+            <v-tabs-slider class="main-color"></v-tabs-slider>
             <v-tab v-for="weekDay in weekDayOptions" :key="weekDay.value">
               {{ weekDay.label }}
             </v-tab>
