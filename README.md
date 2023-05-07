@@ -36,7 +36,7 @@
     <a href="https://hackmd.io/@Ab2Up_njS5OVUz8o_OvDCA/rkK-Flfsu"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="https://coshift.netlify.app/">View Demo</a>
     ·
     <a href="https://github.com/wade0615/ShiftArrangement2.0/issues">Report Bug</a>
     ·
@@ -52,6 +52,7 @@
       <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#participants">Participants</a></li>
+        <li><a href="#prd">PRD</a></li>
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
@@ -108,6 +109,10 @@ A list of commonly used resources that I find helpful are listed in the acknowle
 - Yuna
 - Evena
 - Louis
+
+### PRD
+
+- [figma link](https://www.figma.com/file/aiKRjBa8b0XKk9TPlAN8ss/coshift?type=design&node-id=2%3A83&t=IhQrjfnh1zP7MZ0K-1)
 
 ### Built With
 
