@@ -11,7 +11,7 @@ const _valueSwitch = (value) => {
 };
 
 export default {
-  PORT: 3000,
+  PORT: 3081,
   root: join(__dirname, '..'),
   ShadowRoot: join(__dirname, '..'),
   IS_BUILD_CLIENT_STATIC: _valueSwitch('IS_BUILD_CLIENT_STATIC'),
