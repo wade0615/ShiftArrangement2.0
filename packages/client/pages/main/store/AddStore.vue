@@ -276,7 +276,7 @@ export default {
       /** 取得驗證是否通過，通過為 true */
       const isValid = await this.$refs.addStore.validate()
       if (isValid) {
-        console.log('通過驗證', this.validationForm)
+        // console.log('通過驗證', this.validationForm)
         this.pageOne = false
       }
     },

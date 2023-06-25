@@ -16,7 +16,7 @@
             編輯
           </nuxt-link>
         </header>
-        <div class="p-3 shadow-md">
+        <div class="p-3 shadow-md rounded-md">
           <v-simple-table dense>
             <thead></thead>
             <tbody>
@@ -45,7 +45,9 @@
           </nuxt-link>
         </header>
         <div v-if="isRoutineShifts" class="p-3 shadow-md">站前店例行班表</div>
-        <div v-else class="p-3 shadow-md">尚未有此店面的例行班表紀錄</div>
+        <div v-else class="p-3 shadow-md rounded-md">
+          尚未有此店面的例行班表紀錄
+        </div>
       </section>
       <!-- Line 群組通知 -->
       <section class="px-4 mb-6">
@@ -55,11 +57,11 @@
             綁定
           </nuxt-link>
         </header>
-        <div v-if="isBindToLine" class="p-3 shadow-md">
+        <div v-if="isBindToLine" class="p-3 shadow-md rounded-md">
           <div class="inline-block mr-2">Line 群組</div>
           <div class="inline-block">薛丁格咖啡店用公事群</div>
         </div>
-        <div v-else class="p-3 shadow-md text-secondary">
+        <div v-else class="p-3 shadow-md rounded-md text-secondary">
           您目前尚未綁定 Line
           群組，如完成綁定，當您發佈班表時，系統會自動在群組發送通知訊息。
         </div>
@@ -72,11 +74,11 @@
             管理活動
           </nuxt-link>
         </header>
-        <div v-if="isStoreEvents" class="">
+        <div v-if="isStoreEvents">
           <div
             v-for="(_storeEvent, index) in storeEvents"
             :key="index + 'storeEvents'"
-            class="mb-4 p-3 shadow-md"
+            class="mb-4 p-3 shadow-md rounded-md"
           >
             <v-chip
               v-if="_storeEvent.storeEventState === storeEventsStateCode.Closed"
@@ -104,12 +106,56 @@
           尚未有任何店面活動
         </div>
       </section>
+      <!-- 店面營業時間 -->
+      <section class="px-4 mb-6">
+        <header class="flex justify-between mb-4">
+          <h3 class="text-lg font-medium">店面營業時間</h3>
+          <nuxt-link to="/main/store/edit/businessHours" class="main-color">
+            編輯
+          </nuxt-link>
+        </header>
+        <div class="p-3 shadow-md rounded-md">
+          <div
+            v-for="(_businessHours, index) in businessHours"
+            :key="index + 'businessHours'"
+            class="mb-2"
+          >
+            <p class="inline-block mr-3">{{ _businessHours.label }}</p>
+            <p
+              v-if="
+                _businessHours.state === storeBusinessHoursStateCode.OpenTime
+              "
+              class="inline-block"
+            >
+              {{ _businessHours.value }}
+            </p>
+            <p
+              v-if="
+                _businessHours.state ===
+                storeBusinessHoursStateCode.PublicHoliday
+              "
+              class="inline-block text-primary"
+            >
+              公休日
+            </p>
+            <p
+              v-if="
+                _businessHours.state === storeBusinessHoursStateCode.Unfilled
+              "
+              class="inline-block text-tertiary"
+            >
+              尚未填寫
+            </p>
+          </div>
+        </div>
+      </section>
     </body>
   </div>
 </template>
 
 <script>
 import StoreEventsStateCode from '@/enum/storeEventsStateCode'
+import StoreBusinessHoursStateCode from '@/enum/storeBusinessHoursStateCode'
 
 export default {
   name: 'StoreDetail',
@@ -139,6 +185,44 @@ export default {
         },
       ],
       storeEventsStateCode: StoreEventsStateCode,
+      storeBusinessHoursStateCode: StoreBusinessHoursStateCode,
+      businessHours: [
+        {
+          label: '週一',
+          state: StoreBusinessHoursStateCode.OpenTime,
+          value: '06:00~18:00',
+        },
+        {
+          label: '週二',
+          state: StoreBusinessHoursStateCode.OpenTime,
+          value: '06:00~18:00',
+        },
+        {
+          label: '週三',
+          state: StoreBusinessHoursStateCode.OpenTime,
+          value: '06:00~18:00',
+        },
+        {
+          label: '週四',
+          state: StoreBusinessHoursStateCode.OpenTime,
+          value: '06:00~18:00',
+        },
+        {
+          label: '週五',
+          state: StoreBusinessHoursStateCode.Unfilled,
+          value: '尚未填寫',
+        },
+        {
+          label: '週六',
+          state: StoreBusinessHoursStateCode.PublicHoliday,
+          value: '公休日',
+        },
+        {
+          label: '週日',
+          state: StoreBusinessHoursStateCode.PublicHoliday,
+          value: '公休日',
+        },
+      ],
     }
   },
   computed: {},
@@ -161,4 +245,6 @@ export default {
       color: $textSecondary
   td
     border-bottom: none
+  p
+    margin: 0
 </style>
