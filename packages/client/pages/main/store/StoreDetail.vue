@@ -80,8 +80,8 @@
             <v-chip
               v-if="_storeEvent.storeEventState === storeEventsStateCode.Closed"
               class="ma-2"
-              color="primary"
-              text-color="secondary"
+              color="primary50"
+              text-color="primary600"
               label
             >
               期間未營業
