@@ -9,7 +9,7 @@
     </header>
     <body>
       <!-- 基本資訊 -->
-      <section class="px-4 mb-6">
+      <section id="storeInfo" class="px-4 mb-6">
         <header class="flex justify-between mb-2">
           <h3 class="text-lg font-medium">基本資訊</h3>
           <nuxt-link to="/main/store/edit/StoreInfo" class="main-color">
@@ -37,7 +37,7 @@
         </div>
       </section>
       <!-- 例行班表 -->
-      <section class="px-4 mb-6">
+      <section id="routineShifts" class="px-4 mb-6">
         <header class="flex justify-between">
           <h3 class="text-lg font-medium">例行班表</h3>
           <nuxt-link to="/main/store/edit/RoutineShifts" class="main-color">
@@ -50,7 +50,7 @@
         </div>
       </section>
       <!-- Line 群組通知 -->
-      <section class="px-4 mb-6">
+      <section id="bindToLine" class="px-4 mb-6">
         <header class="flex justify-between">
           <h3 class="text-lg font-medium">Line 群組通知</h3>
           <nuxt-link to="/main/store/edit/BindToLine" class="main-color">
@@ -67,7 +67,7 @@
         </div>
       </section>
       <!-- 店面活動 -->
-      <section class="px-4 mb-6">
+      <section id="storeEvents" class="px-4 mb-6">
         <header class="flex justify-between">
           <h3 class="text-lg font-medium">店面活動</h3>
           <nuxt-link to="/main/store/edit/StoreEvents" class="main-color">
@@ -107,10 +107,10 @@
         </div>
       </section>
       <!-- 店面營業時間 -->
-      <section class="px-4 mb-6">
+      <section id="businessHours" class="px-4 mb-6">
         <header class="flex justify-between mb-4">
           <h3 class="text-lg font-medium">店面營業時間</h3>
-          <nuxt-link to="/main/store/edit/businessHours" class="main-color">
+          <nuxt-link to="/main/store/edit/BusinessHours" class="main-color">
             編輯
           </nuxt-link>
         </header>
@@ -147,6 +147,36 @@
               尚未填寫
             </p>
           </div>
+        </div>
+      </section>
+      <!-- 其他店面資訊 -->
+      <section id="moreStoreInfo" class="px-4 mb-6">
+        <header class="flex justify-between mb-4">
+          <h3 class="text-lg font-medium">其他店面資訊</h3>
+          <nuxt-link to="/main/store/edit/MoreStoreInfo" class="main-color">
+            編輯
+          </nuxt-link>
+        </header>
+        <div class="p-3 shadow-md rounded-md">
+          <v-simple-table dense>
+            <thead></thead>
+            <tbody>
+              <tr>
+                <td>店面地址</td>
+                <td v-if="moreStoreInfo.address">
+                  {{ moreStoreInfo.address }}
+                </td>
+                <td v-else class="text-tertiary">尚未填寫</td>
+              </tr>
+              <tr>
+                <td>聯絡電話</td>
+                <td v-if="moreStoreInfo.phoneNumber">
+                  {{ moreStoreInfo.phoneNumber }}
+                </td>
+                <td v-else class="text-tertiary">尚未填寫</td>
+              </tr>
+            </tbody>
+          </v-simple-table>
         </div>
       </section>
     </body>
@@ -223,6 +253,10 @@ export default {
           value: '公休日',
         },
       ],
+      moreStoreInfo: {
+        address: '瓜瓜市哈哈街噗噗一弄',
+        phoneNumber: '',
+      },
     }
   },
   computed: {},
@@ -240,11 +274,16 @@ export default {
     color: transparent
   tr
     td:first-child
-      width: 25%
-      padding-right: 0
-      color: $textSecondary
+      width: 20%
+      padding: 0
   td
     border-bottom: none
+  #storeInfo
+    td:first-child
+      color: $textSecondary
+  #moreStoreInfo
+    td:first-child
+      color: $textPrimary
   p
     margin: 0
 </style>
