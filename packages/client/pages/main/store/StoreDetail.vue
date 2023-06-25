@@ -179,6 +179,16 @@
           </v-simple-table>
         </div>
       </section>
+      <!-- 刪除店面 -->
+      <section id="deleteStore" class="px-4 mb-6">
+        <header class="flex justify-between mb-4">
+          <h3 class="text-lg font-medium">其他店面資訊</h3>
+          <span class="main-color"> 刪除 </span>
+        </header>
+        <div>
+          <p class="text-tertiary">如刪除店面系統將不會留下此店面紀錄</p>
+        </div>
+      </section>
     </body>
   </div>
 </template>
