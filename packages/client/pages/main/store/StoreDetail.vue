@@ -72,22 +72,32 @@
             管理活動
           </nuxt-link>
         </header>
-        <div v-if="isStoreEvents" class="p-3 shadow-md">
+        <div v-if="isStoreEvents" class="">
           <div
             v-for="(_storeEvent, index) in storeEvents"
             :key="index + 'storeEvents'"
+            class="mb-4 p-3 shadow-md"
           >
             <v-chip
               v-if="_storeEvent.storeEventState === storeEventsStateCode.Closed"
-              class="ma-2"
-              color="primary50"
-              text-color="primary600"
+              class="mb-2"
+              color="error50"
+              text-color="error600"
               label
             >
               期間未營業
             </v-chip>
-            <div>title</div>
-            <div>time</div>
+            <v-chip
+              v-if="_storeEvent.storeEventState === storeEventsStateCode.Open"
+              class="mb-2"
+              color="primary50"
+              text-color="primary600"
+              label
+            >
+              營業時間調整
+            </v-chip>
+            <div>{{ _storeEvent.storeEventTitle }}</div>
+            <div>{{ _storeEvent.storeEventDateRange }}</div>
           </div>
         </div>
         <div v-else class="p-3 shadow-md text-secondary">
@@ -114,8 +124,18 @@ export default {
       storeEvents: [
         {
           storeEventState: StoreEventsStateCode.Closed,
-          storeEventTitle: '',
-          storeEventDateRange: '',
+          storeEventTitle: '員工教育訓練',
+          storeEventDateRange: '2022/10/08(五)',
+        },
+        {
+          storeEventState: StoreEventsStateCode.Open,
+          storeEventTitle: '春節歡慶活動',
+          storeEventDateRange: '2022/01/31(一) - 2022/02/04(五)',
+        },
+        {
+          storeEventState: StoreEventsStateCode.OpenTimeChange,
+          storeEventTitle: '付清節活動',
+          storeEventDateRange: '2022/08/08(一)',
         },
       ],
       storeEventsStateCode: StoreEventsStateCode,
