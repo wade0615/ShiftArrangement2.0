@@ -2,7 +2,7 @@
   <main id="stores" class="px-4 py-8" data-app>
     <section class="flex justify-between mb-3">
       <h2 @click="handleDialog">店面管理</h2>
-      <nuxt-link to="/main/store/AddStore" class="text-link">
+      <nuxt-link to="/main/store/AddStore" class="main-color">
         新增店面
       </nuxt-link>
     </section>
@@ -16,8 +16,19 @@
         <div class="flex items-center">
           <div class="flex-auto">
             <h3>{{ store.storeName }}</h3>
-            <p>{{ store.address }}</p>
-            <p>{{ store.time }}</p>
+            <p>
+              <v-icon>mdi-calendar-month</v-icon>
+              <span>{{ store.time }}</span>
+            </p>
+            <p>
+              <v-icon>mdi-bell</v-icon>
+              <span v-if="store.lineNotification">已啟用 Line 群組通知</span>
+              <span v-else>未啟用 Line 群組通知</span>
+            </p>
+            <p>
+              <v-icon>mdi-bell</v-icon>
+              <span>{{ store.time }}</span>
+            </p>
           </div>
           <div class="flex-initial">
             <v-icon>mdi-chevron-right</v-icon>
@@ -46,14 +57,14 @@ export default {
         {
           id: 'fujr4',
           storeName: '站前店',
-          address: '台北市忠孝東路 3 號',
           time: '每週二公休',
+          lineNotification: true,
         },
         {
           id: 'iked9',
           storeName: '公館店',
-          address: '台北市羅斯福路 3 號',
           time: '每週二公休',
+          lineNotification: false,
         },
       ],
     }

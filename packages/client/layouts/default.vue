@@ -1,7 +1,11 @@
 <template>
-  <div>
-    <Nuxt />
-  </div>
+  <v-app>
+    <v-theme-provider>
+      <div>
+        <Nuxt />
+      </div>
+    </v-theme-provider>
+  </v-app>
 </template>
 
 <script>

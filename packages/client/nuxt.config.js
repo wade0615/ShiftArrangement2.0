@@ -25,7 +25,7 @@ export default {
   plugins: [
     '~/veevalidate',
     '~plugins/styledCom/index.js',
-    { src: '~plugins/vuetify.js', ssr: false },
+    '~plugins/vuetify.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

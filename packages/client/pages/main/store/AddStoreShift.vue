@@ -157,7 +157,7 @@ export default {
       }
     },
     setCopyShiftOptions() {
-      console.log('setCopyShiftOptions', this.storeInfo.publicHoliday)
+      // console.log('setCopyShiftOptions', this.storeInfo.publicHoliday)
       const copyShiftOptions = JSON.parse(JSON.stringify(this.copyShiftOptions))
       const currentCopyDays = copyShiftOptions.filter(
         (option, index) =>

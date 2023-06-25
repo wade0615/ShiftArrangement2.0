@@ -1,16 +1,11 @@
 <template>
-  <v-app>
-    <v-theme-provider>
-      <div>
-        <NavBar />
-        <Nuxt />
-      </div>
-    </v-theme-provider>
-  </v-app>
+  <div>StoreInfo</div>
 </template>
 
 <script>
 export default {
+  name: 'StoreInfo',
+  layout: 'main',
   props: [],
   data: () => {
     return {}
