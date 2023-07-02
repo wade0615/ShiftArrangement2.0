@@ -4,7 +4,7 @@
       <nuxt-link to="/main/store/StoreList">
         <v-icon>mdi-chevron-left</v-icon>
       </nuxt-link>
-      <h2>{{ header }}</h2>
+      <h2>{{ formValues.storeName }}</h2>
       <v-icon class="icon-transparent">mdi-chevron-left</v-icon>
     </header>
     <main>
@@ -22,15 +22,23 @@
             <tbody>
               <tr>
                 <td>店面名稱</td>
-                <td>站前店</td>
+                <td>{{ formValues.storeName }}</td>
               </tr>
               <tr>
                 <td>公休日</td>
-                <td>每週二</td>
+                <td>
+                  <span
+                    v-for="(_publicHoliday, index) in formValues.publicHoliday"
+                    :key="'_publicHoliday' + index"
+                  >
+                    {{ _publicHoliday }}</span
+                  >
+                </td>
               </tr>
               <tr>
                 <td>內外場</td>
-                <td>有內外場</td>
+                <td v-if="formValues.separateFrontAndBack">有內外場</td>
+                <td v-else>無內外場</td>
               </tr>
             </tbody>
           </v-simple-table>
@@ -44,7 +52,15 @@
             新增
           </nuxt-link>
         </header>
-        <div v-if="isRoutineShifts" class="p-3 shadow-md">站前店例行班表</div>
+        <div v-if="formValues.routineShifts.length > 0">
+          <div
+            v-for="(_routineShift, index) in formValues.routineShifts"
+            :key="'_routineShift' + index"
+            class="p-3 shadow-md"
+          >
+            {{ _routineShift }}
+          </div>
+        </div>
         <div v-else class="p-3 shadow-md rounded-md">
           尚未有此店面的例行班表紀錄
         </div>
@@ -57,9 +73,17 @@
             綁定
           </nuxt-link>
         </header>
-        <div v-if="isBindToLine" class="p-3 shadow-md rounded-md">
-          <div class="inline-block mr-2">Line 群組</div>
-          <div class="inline-block">薛丁格咖啡店用公事群</div>
+        <div
+          v-if="formValues.lineGroups.length > 0"
+          class="p-3 shadow-md rounded-md"
+        >
+          <div
+            v-for="(_lineGroup, index) in formValues.lineGroups"
+            :key="'_lineGroup' + index"
+          >
+            <div class="inline-block mr-2">Line 群組</div>
+            <div class="inline-block">{{ _lineGroup }}</div>
+          </div>
         </div>
         <div v-else class="p-3 shadow-md rounded-md text-secondary">
           您目前尚未綁定 Line
@@ -74,9 +98,9 @@
             管理活動
           </nuxt-link>
         </header>
-        <div v-if="isStoreEvents">
+        <div v-if="formValues.storeEvents.length > 0">
           <div
-            v-for="(_storeEvent, index) in storeEvents"
+            v-for="(_storeEvent, index) in formValues.storeEvents"
             :key="index + 'storeEvents'"
             class="mb-4 p-3 shadow-md rounded-md"
           >
@@ -116,7 +140,7 @@
         </header>
         <div class="p-3 shadow-md rounded-md">
           <div
-            v-for="(_businessHours, index) in businessHours"
+            v-for="(_businessHours, index) in formValues.businessHours"
             :key="index + 'businessHours'"
             class="mb-2"
           >
@@ -163,15 +187,15 @@
             <tbody>
               <tr>
                 <td>店面地址</td>
-                <td v-if="moreStoreInfo.address">
-                  {{ moreStoreInfo.address }}
+                <td v-if="formValues.moreStoreInfo.address">
+                  {{ formValues.moreStoreInfo.address }}
                 </td>
                 <td v-else class="text-tertiary">尚未填寫</td>
               </tr>
               <tr>
                 <td>聯絡電話</td>
-                <td v-if="moreStoreInfo.phoneNumber">
-                  {{ moreStoreInfo.phoneNumber }}
+                <td v-if="formValues.moreStoreInfo.phoneNumber">
+                  {{ formValues.moreStoreInfo.phoneNumber }}
                 </td>
                 <td v-else class="text-tertiary">尚未填寫</td>
               </tr>
@@ -197,81 +221,100 @@
 import StoreEventsStateCode from '@/enum/storeEventsStateCode'
 import StoreBusinessHoursStateCode from '@/enum/storeBusinessHoursStateCode'
 
+const apiResValues = {
+  storeName: '站前店',
+  publicHoliday: ['星期四', '星期日'],
+  separateFrontAndBack: true,
+  routineShifts: ['站前店例行班表', '站前店週年慶班表'],
+  lineGroups: ['薛丁格咖啡店用公事群'],
+  storeEvents: [
+    {
+      storeEventState: StoreEventsStateCode.Closed,
+      storeEventTitle: '員工教育訓練',
+      storeEventDateRange: '2022/10/08(五)',
+    },
+    {
+      storeEventState: StoreEventsStateCode.Open,
+      storeEventTitle: '春節歡慶活動',
+      storeEventDateRange: '2022/01/31(一) - 2022/02/04(五)',
+    },
+    {
+      storeEventState: StoreEventsStateCode.OpenTimeChange,
+      storeEventTitle: '付清節活動',
+      storeEventDateRange: '2022/08/08(一)',
+    },
+  ],
+  businessHours: [
+    {
+      label: '週一',
+      state: StoreBusinessHoursStateCode.OpenTime,
+      value: '06:00~18:00',
+    },
+    {
+      label: '週二',
+      state: StoreBusinessHoursStateCode.OpenTime,
+      value: '06:00~18:00',
+    },
+    {
+      label: '週三',
+      state: StoreBusinessHoursStateCode.OpenTime,
+      value: '06:00~18:00',
+    },
+    {
+      label: '週四',
+      state: StoreBusinessHoursStateCode.OpenTime,
+      value: '06:00~18:00',
+    },
+    {
+      label: '週五',
+      state: StoreBusinessHoursStateCode.Unfilled,
+      value: '尚未填寫',
+    },
+    {
+      label: '週六',
+      state: StoreBusinessHoursStateCode.PublicHoliday,
+      value: '公休日',
+    },
+    {
+      label: '週日',
+      state: StoreBusinessHoursStateCode.PublicHoliday,
+      value: '公休日',
+    },
+  ],
+  moreStoreInfo: {
+    address: '',
+    phoneNumber: '',
+  },
+}
+
 export default {
   name: 'StoreDetail',
   layout: 'main',
   props: [],
   data: () => {
     return {
-      header: '站前店',
-      isRoutineShifts: true,
-      isBindToLine: false,
-      isStoreEvents: true,
-      storeEvents: [
-        {
-          storeEventState: StoreEventsStateCode.Closed,
-          storeEventTitle: '員工教育訓練',
-          storeEventDateRange: '2022/10/08(五)',
+      formValues: {
+        storeName: '',
+        publicHoliday: [],
+        separateFrontAndBack: false,
+        routineShifts: [],
+        lineGroups: [],
+        storeEvents: [],
+        businessHours: [],
+        moreStoreInfo: {
+          address: '',
+          phoneNumber: '',
         },
-        {
-          storeEventState: StoreEventsStateCode.Open,
-          storeEventTitle: '春節歡慶活動',
-          storeEventDateRange: '2022/01/31(一) - 2022/02/04(五)',
-        },
-        {
-          storeEventState: StoreEventsStateCode.OpenTimeChange,
-          storeEventTitle: '付清節活動',
-          storeEventDateRange: '2022/08/08(一)',
-        },
-      ],
+      },
       storeEventsStateCode: StoreEventsStateCode,
       storeBusinessHoursStateCode: StoreBusinessHoursStateCode,
-      businessHours: [
-        {
-          label: '週一',
-          state: StoreBusinessHoursStateCode.OpenTime,
-          value: '06:00~18:00',
-        },
-        {
-          label: '週二',
-          state: StoreBusinessHoursStateCode.OpenTime,
-          value: '06:00~18:00',
-        },
-        {
-          label: '週三',
-          state: StoreBusinessHoursStateCode.OpenTime,
-          value: '06:00~18:00',
-        },
-        {
-          label: '週四',
-          state: StoreBusinessHoursStateCode.OpenTime,
-          value: '06:00~18:00',
-        },
-        {
-          label: '週五',
-          state: StoreBusinessHoursStateCode.Unfilled,
-          value: '尚未填寫',
-        },
-        {
-          label: '週六',
-          state: StoreBusinessHoursStateCode.PublicHoliday,
-          value: '公休日',
-        },
-        {
-          label: '週日',
-          state: StoreBusinessHoursStateCode.PublicHoliday,
-          value: '公休日',
-        },
-      ],
-      moreStoreInfo: {
-        address: '瓜瓜市哈哈街噗噗一弄',
-        phoneNumber: '',
-      },
     }
   },
   computed: {},
   watch: {},
-  mounted() {},
+  mounted() {
+    this.formValues = apiResValues
+  },
   beforeMount() {},
   updated() {},
   methods: {},

@@ -160,7 +160,7 @@ export default {
       /** 取得驗證是否通過，通過為 true */
       const isValid = await this.$refs.authCode.validate()
       if (isValid) {
-        // this.$emit('handle_otp', this.validationForm)
+        // this.$emit('handle _otp', this.validationForm)
         console.log('通過啦')
       }
     },
