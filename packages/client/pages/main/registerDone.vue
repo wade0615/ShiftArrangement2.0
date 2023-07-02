@@ -14,8 +14,8 @@
     </div>
     <StyledBtn
       large
-      text-color="#fff"
-      bg-color="#46B964"
+      text-color="white"
+      bg-color="mainColor"
       min-width="160"
       to="/main/store/AddStore"
       >前往新增店面</StyledBtn

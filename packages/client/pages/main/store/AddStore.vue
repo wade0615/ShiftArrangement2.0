@@ -9,7 +9,7 @@
       <h2 class="mb-8 text-center">新增店面資訊</h2>
       <!-- 第一步 -->
       <section v-if="pageOne">
-        <ValidationProvider ref="storeName" :rules="rules.storeName">
+        <ValidationProvider ref="storeName" :rules="validationRules.storeName">
           <p class="mb-2">店面名稱*</p>
           <StyledInput
             v-model="validationForm.storeName"
@@ -18,7 +18,10 @@
             required
           />
         </ValidationProvider>
-        <ValidationProvider ref="publicHoliday" :rules="rules.publicHoliday">
+        <ValidationProvider
+          ref="publicHoliday"
+          :rules="validationRules.publicHoliday"
+        >
           <p class="mb-2">店面公休日*</p>
           <StyledInput
             v-model="validationForm.publicHoliday"
@@ -31,7 +34,7 @@
         </ValidationProvider>
         <ValidationProvider
           ref="separateFrontAndBack"
-          :rules="rules.separateFrontAndBack"
+          :rules="validationRules.separateFrontAndBack"
         >
           <section class="flex justify-between items-center">
             <p class="mb-2">店內有無分內外場*</p>
@@ -49,8 +52,8 @@
           <StyledBtn
             prepend-icon="mdi-thumb-up"
             large
-            text-color="#fff"
-            bg-color="#46B964"
+            text-color="white"
+            bg-color="mainColor"
             min-width="160"
             type="submit"
             :disabled="invalid"
@@ -122,8 +125,8 @@
                     </div>
                   </v-card-text>
                   <StyledBtn
-                    text-color="#46B964"
-                    bg-color="#fff"
+                    text-color="white"
+                    bg-color="mainColor"
                     min-width="160"
                     type="button"
                     elevation="0"
@@ -137,16 +140,16 @@
           </v-tabs-items>
         </v-card>
         <StyledBtn
-          text-color="#fff"
-          bg-color="#46B964"
+          text-color="white"
+          bg-color="mainColor"
           min-width="160"
           type="submit"
           elevation="0"
           >建立完成</StyledBtn
         >
         <StyledBtn
-          text-color="#46B964"
-          bg-color="#fff"
+          text-color="white"
+          bg-color="mainColor"
           min-width="160"
           type="button"
           elevation="0"
@@ -188,7 +191,7 @@ export default {
         separateFrontAndBack: false,
         weekDayShifts: [[], [], [], [], [], [], []],
       },
-      rules: {
+      validationRules: {
         storeName: 'required|max:30',
         publicHoliday: 'required',
         separateFrontAndBack: 'required',

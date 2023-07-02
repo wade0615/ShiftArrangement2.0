@@ -77,6 +77,7 @@
         :key="index + 'radio'"
         :label="option.label"
         :value="option.value"
+        color="mainColor"
       ></v-radio>
     </v-radio-group>
     <!-- timePicker -->

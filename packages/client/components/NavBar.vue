@@ -1,6 +1,6 @@
 <template>
   <section id="nav-bar">
-    <v-app-bar>
+    <v-app-bar :elevation="0">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>{{ title }}</v-toolbar-title>
       <span></span>
@@ -15,7 +15,7 @@
           active-class="deep-purple--text text--accent-4"
         >
           <v-list-item v-for="(item, index) in list" :key="index + 'list'">
-            <nuxt-link :to="item.route" class="col-12 col-md-6">
+            <nuxt-link :to="item.route" class="col-12 col-md-6 main-color">
               {{ item.label }}
             </nuxt-link>
           </v-list-item>

@@ -8,6 +8,7 @@
       :elevation="elevation"
       :disabled="disabled"
       :to="to"
+      :outlined="outlined"
       @click="onClick"
       ><slot>{{ text }}</slot>
     </v-btn>
@@ -53,6 +54,14 @@ export default {
       type: String,
       default: '2',
     },
+    outlined: {
+      type: Boolean,
+      default: false,
+    },
+    borderRadius: {
+      type: String,
+      default: '0.5rem',
+    },
   },
   data: () => {
     return {}
@@ -61,6 +70,7 @@ export default {
     cssProps() {
       return {
         '--color': this.textColor,
+        '--borderRadius': this.borderRadius,
       }
     },
   },
@@ -80,4 +90,5 @@ export default {
 .styled-btn
   button.v-btn, a.v-btn
     color: var(--color)
+    border-radius: var(--borderRadius)
 </style>

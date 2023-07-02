@@ -27,7 +27,7 @@
         tag="form"
         @submit.prevent="submit()"
       >
-        <ValidationProvider ref="email" :rules="rules.email">
+        <ValidationProvider ref="email" :rules="validationRules.email">
           <p class="mb-2">Email*</p>
           <StyledInput
             v-model="validationForm.email"
@@ -36,7 +36,7 @@
             required
           />
         </ValidationProvider>
-        <ValidationProvider ref="password" :rules="rules.password">
+        <ValidationProvider ref="password" :rules="validationRules.password">
           <p class="mb-2">密碼設定*</p>
           <StyledInput
             v-model="validationForm.password"
@@ -55,8 +55,8 @@
         <div class="text-center mb-8">
           <StyledBtn
             large
-            text-color="#fff"
-            bg-color="#46B964"
+            text-color="white"
+            bg-color="mainColor"
             min-width="160"
             type="submit"
             :disabled="invalid"
@@ -79,7 +79,7 @@ export default {
         email: '',
         password: '',
       },
-      rules: {
+      validationRules: {
         email: 'required|email',
         password: 'required|max:20',
       },
