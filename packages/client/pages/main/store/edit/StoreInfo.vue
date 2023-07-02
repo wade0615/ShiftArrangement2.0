@@ -66,6 +66,7 @@
           <StyledBtn
             text-color="white"
             bg-color="mainColor"
+            elevation="0"
             min-width="100%"
             border-radius="0.625rem"
             type="submit"
