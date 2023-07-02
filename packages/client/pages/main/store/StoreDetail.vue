@@ -12,7 +12,14 @@
       <section id="storeInfo" class="px-4 mb-6">
         <header class="flex justify-between mb-2">
           <h3 class="text-lg font-medium">基本資訊</h3>
-          <nuxt-link to="/main/store/edit/StoreInfo" class="main-color">
+          <!-- <nuxt-link to="/main/store/edit/StoreInfo" class="main-color"> -->
+          <nuxt-link
+            :to="{
+              path: '/main/store/edit/StoreInfo',
+              query: { values: formValues },
+            }"
+            class="main-color"
+          >
             編輯
           </nuxt-link>
         </header>
@@ -31,7 +38,7 @@
                     v-for="(_publicHoliday, index) in formValues.publicHoliday"
                     :key="'_publicHoliday' + index"
                   >
-                    {{ _publicHoliday }}</span
+                    {{ _publicHoliday.label }}</span
                   >
                 </td>
               </tr>
@@ -223,7 +230,16 @@ import StoreBusinessHoursStateCode from '@/enum/storeBusinessHoursStateCode'
 
 const apiResValues = {
   storeName: '站前店',
-  publicHoliday: ['星期四', '星期日'],
+  publicHoliday: [
+    {
+      label: '星期四',
+      value: 3,
+    },
+    {
+      label: '星期日',
+      value: 6,
+    },
+  ],
   separateFrontAndBack: true,
   routineShifts: ['站前店例行班表', '站前店週年慶班表'],
   lineGroups: ['薛丁格咖啡店用公事群'],

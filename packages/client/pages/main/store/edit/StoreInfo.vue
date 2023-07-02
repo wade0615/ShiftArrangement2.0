@@ -88,7 +88,7 @@ export default {
       header: '編輯店面資訊',
       validationForm: {
         storeName: '',
-        publicHoliday: '',
+        publicHoliday: [],
         separateFrontAndBack: false,
       },
       validationRules: {
@@ -153,15 +153,26 @@ export default {
   computed: {},
   watch: {},
   mounted() {},
-  beforeMount() {},
+  beforeMount() {
+    const propsQuery = this.$route.query.values
+    this.validationForm = {
+      storeName: propsQuery?.storeName ?? '',
+      publicHoliday:
+        propsQuery?.publicHoliday?.map(
+          (_publicHoliday) => _publicHoliday.value
+        ) ?? [],
+      separateFrontAndBack: propsQuery.separateFrontAndBack ?? false,
+    }
+  },
   updated() {},
+  created() {},
   methods: {
     async submit() {
       /** 取得驗證是否通過，通過為 true */
       const isValid = await this.$refs.authCode.validate()
       if (isValid) {
         // this.$emit('handle _otp', this.validationForm)
-        console.log('通過啦')
+        console.log('通過啦', this.validationForm)
       }
     },
   },
