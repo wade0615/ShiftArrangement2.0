@@ -2,12 +2,12 @@
   <div id="store-detail">
     <header class="flex justify-between px-8 py-2.5">
       <nuxt-link to="/main/store/StoreList">
-        <v-icon class="text-transparent">mdi-chevron-left</v-icon>
+        <v-icon>mdi-chevron-left</v-icon>
       </nuxt-link>
       <h2>{{ header }}</h2>
       <v-icon class="icon-transparent">mdi-chevron-left</v-icon>
     </header>
-    <body>
+    <main>
       <!-- 基本資訊 -->
       <section id="storeInfo" class="px-4 mb-6">
         <header class="flex justify-between mb-2">
@@ -189,7 +189,7 @@
           <p class="text-tertiary">如刪除店面系統將不會留下此店面紀錄</p>
         </div>
       </section>
-    </body>
+    </main>
   </div>
 </template>
 

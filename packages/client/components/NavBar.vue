@@ -1,6 +1,6 @@
 <template>
   <section id="nav-bar">
-    <v-app-bar>
+    <v-app-bar :elevation="0">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>{{ title }}</v-toolbar-title>
       <span></span>
