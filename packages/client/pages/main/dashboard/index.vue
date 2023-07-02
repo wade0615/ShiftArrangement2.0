@@ -1,15 +1,15 @@
 <template>
   <main id="dashboard" class="bg-light-gray px-4 py-6">
     <section class="flex gap-2 mb-6">
-      <div class="w-2/3 bg-white rounded px-3 py-2 flex items-center">
+      <div class="w-2/3 bg-white rounded px-3 py-2 flex items-center gap-4">
         <div>
-          <v-avatar color="info" size="42">
+          <v-avatar color="white" size="42">
             <v-icon>mdi-account-circle</v-icon>
           </v-avatar>
         </div>
         <div>
           <h3>{{ dashboardInfo.userName }}</h3>
-          <p>{{ dashboardInfo.storeName }}</p>
+          <p class="mb-0">{{ dashboardInfo.storeName }}</p>
         </div>
       </div>
       <div class="w-1/3 bg-white rounded px-3 py-2 flex gap-2 items-center">
@@ -25,7 +25,11 @@
       <p class="mb-3">正在執行班表：目前無執行中班表</p>
       <v-tabs v-model="tab" fixed-tabs>
         <v-tabs-slider class="main-color"></v-tabs-slider>
-        <v-tab v-for="item in tabItems" :key="item.value" class="bg-light-gray">
+        <v-tab
+          v-for="item in tabItems"
+          :key="item.value"
+          class="bg-light-gray main-color"
+        >
           {{ item.label }}
         </v-tab>
       </v-tabs>
