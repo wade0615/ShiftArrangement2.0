@@ -12,7 +12,6 @@
       <section id="storeInfo" class="px-4 mb-6">
         <header class="flex justify-between mb-2">
           <h3 class="text-lg font-medium">基本資訊</h3>
-          <!-- <nuxt-link to="/main/store/edit/StoreInfo" class="main-color"> -->
           <nuxt-link
             :to="{
               path: '/main/store/edit/StoreInfo',
@@ -55,7 +54,13 @@
       <section id="routineShifts" class="px-4 mb-6">
         <header class="flex justify-between">
           <h3 class="text-lg font-medium">例行班表</h3>
-          <nuxt-link to="/main/store/edit/RoutineShifts" class="main-color">
+          <nuxt-link
+            :to="{
+              path: '/main/store/edit/RoutineShifts',
+              query: { values: formValues },
+            }"
+            class="main-color"
+          >
             新增
           </nuxt-link>
         </header>
