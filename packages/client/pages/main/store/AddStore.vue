@@ -95,11 +95,12 @@
                     您尚未添加任何班別
                   </v-card-text>
                   <StyledBtn
-                    text-color="#46B964"
-                    bg-color="#fff"
+                    text-color="white"
+                    bg-color="mainColor"
                     min-width="160"
                     type="button"
                     elevation="0"
+                    class="mt-4"
                     @click="addShift()"
                   >
                     <v-icon light>mdi-plus</v-icon>新增班別
@@ -118,10 +119,24 @@
                       <span>
                         {{ shifts.startTime }} ~ {{ shifts.endTime }}
                       </span>
-                      <span v-if="shifts.configuration === 'morning'">
-                        早
+                      <span
+                        v-if="
+                          shifts.configuration.includes(
+                            storeConfigurationStateCode.Front
+                          )
+                        "
+                      >
+                        外
                       </span>
-                      <span v-else> 晚 </span>
+                      <span
+                        v-if="
+                          shifts.configuration.includes(
+                            storeConfigurationStateCode.Back
+                          )
+                        "
+                      >
+                        內
+                      </span>
                     </div>
                   </v-card-text>
                   <StyledBtn
@@ -130,6 +145,7 @@
                     min-width="160"
                     type="button"
                     elevation="0"
+                    class="mt-4"
                     @click="addShift()"
                   >
                     <v-icon light>mdi-plus</v-icon>新增班別
@@ -145,6 +161,7 @@
           min-width="160"
           type="submit"
           elevation="0"
+          class="mb-2"
           >建立完成</StyledBtn
         >
         <StyledBtn
@@ -177,6 +194,7 @@
 
 <script>
 import AddStoreShift from '@/pages/main/store/AddStoreShift'
+import StoreConfigurationStateCode from '@/enum/storeConfigurationStateCode'
 
 export default {
   name: 'AddStore',
@@ -185,6 +203,7 @@ export default {
   props: [],
   data: () => {
     return {
+      storeConfigurationStateCode: StoreConfigurationStateCode,
       validationForm: {
         storeName: '',
         publicHoliday: [],
@@ -296,6 +315,7 @@ export default {
     },
     /** 新增班別 */
     addNewShift(values) {
+      console.log('addNewShift', values)
       this.handleDialog()
       // 新增班表進指定 週天
       this.validationForm.weekDayShifts[this.tab].push(values)
