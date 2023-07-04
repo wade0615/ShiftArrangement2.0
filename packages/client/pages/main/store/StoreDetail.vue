@@ -128,8 +128,8 @@
             <v-chip
               v-if="_storeEvent.storeEventState === storeEventsStateCode.Open"
               class="mb-2"
-              color="primary50"
-              text-color="primary600"
+              color="#edf8f0"
+              text-color="#40a85b"
               label
             >
               營業時間調整
