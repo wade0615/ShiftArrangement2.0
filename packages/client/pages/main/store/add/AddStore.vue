@@ -6,9 +6,19 @@
       tag="form"
       @submit.prevent="submit()"
     >
-      <h2 class="mb-8 text-center">新增店面資訊</h2>
+      <header
+        v-show="activeAddStoreShift"
+        class="flex justify-between py-2.5 mb-8"
+      >
+        <v-icon @click="handleDialog">mdi-chevron-left</v-icon>
+        <h2 class="text-center">新增班別</h2>
+        <v-icon class="icon-transparent">mdi-chevron-left</v-icon>
+      </header>
+      <header v-show="!activeAddStoreShift" class="mb-8 text-center">
+        <h2>新增店面資訊</h2>
+      </header>
       <!-- 第一步 -->
-      <section v-if="pageOne">
+      <section v-if="pageOne" v-show="!activeAddStoreShift">
         <ValidationProvider ref="storeName" :rules="validationRules.storeName">
           <p class="mb-2">店面名稱*</p>
           <StyledInput
@@ -63,7 +73,7 @@
         </div>
       </section>
       <!-- 第二步 -->
-      <section v-else>
+      <section v-if="!pageOne" v-show="!activeAddStoreShift">
         <v-card elevation="2" class="p-3 mb-8">
           <p class="mb-2">設定店面班別</p>
           <v-tabs v-model="tab" fixed-tabs>
@@ -119,12 +129,13 @@
                       <span>
                         {{ shifts.startTime }} ~ {{ shifts.endTime }}
                       </span>
-                      <span
+                      <!-- <span
                         v-if="
                           shifts.configuration.includes(
                             storeConfigurationStateCode.Front
                           )
                         "
+                        class="mr-1 px-1.5 py-1 bg-main-color text-white rounded"
                       >
                         外
                       </span>
@@ -134,9 +145,76 @@
                             storeConfigurationStateCode.Back
                           )
                         "
+                        class="px-1.5 py-1 bg-main-color text-white rounded"
                       >
                         內
-                      </span>
+                      </span> -->
+                      <div>
+                        <div
+                          v-if="shifts.configuration.length === 0"
+                          class="configuration-card"
+                        >
+                          <div class="flex items-center">
+                            <div class="flex-1">
+                              <span class="mr-2">正職 0 位</span>
+                              <span>兼職 0 位</span>
+                            </div>
+                            <div>
+                              <v-icon class="primary-text-500"
+                                >mdi-chevron-right</v-icon
+                              >
+                            </div>
+                          </div>
+                        </div>
+                        <div v-else class="configuration-card">
+                          <div
+                            v-if="
+                              shifts.configuration.includes(
+                                storeConfigurationStateCode.Front
+                              )
+                            "
+                            class="flex items-center"
+                          >
+                            <div class="flex-1">
+                              <span
+                                class="mr-2 px-1.5 py-1 bg-main-color text-white rounded"
+                              >
+                                外
+                              </span>
+                              <span class="mr-2">正職 0 位</span>
+                              <span>兼職 0 位</span>
+                            </div>
+                            <div>
+                              <v-icon class="primary-text-500"
+                                >mdi-chevron-right</v-icon
+                              >
+                            </div>
+                          </div>
+                          <div
+                            v-if="
+                              shifts.configuration.includes(
+                                storeConfigurationStateCode.Back
+                              )
+                            "
+                            class="flex items-center"
+                          >
+                            <div class="flex-1">
+                              <span
+                                class="mr-2 px-1.5 py-1 bg-main-color text-white rounded"
+                              >
+                                內
+                              </span>
+                              <span class="mr-2">正職 0 位</span>
+                              <span>兼職 0 位</span>
+                            </div>
+                            <div>
+                              <v-icon class="primary-text-500"
+                                >mdi-chevron-right</v-icon
+                              >
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </v-card-text>
                   <StyledBtn
@@ -173,7 +251,7 @@
           @click="previousStep()"
           >回上一步</StyledBtn
         >
-        <StyledDialog
+        <!-- <StyledDialog
           :value="activeDialog"
           title="新增班別"
           confirm-text="新增"
@@ -186,14 +264,22 @@
             :current-day="tab"
             @onSubmit="addNewShift"
           />
-        </StyledDialog>
+        </StyledDialog> -->
+      </section>
+      <section v-show="activeAddStoreShift">
+        <AddStoreShift
+          v-if="activeAddStoreShift"
+          :store-info="validationForm"
+          :current-day="tab"
+          @onSubmit="addNewShift"
+        />
       </section>
     </ValidationObserver>
   </main>
 </template>
 
 <script>
-import AddStoreShift from '@/pages/main/store/AddStoreShift'
+import AddStoreShift from '@/pages/main/store/add/AddStoreShift'
 import StoreConfigurationStateCode from '@/enum/storeConfigurationStateCode'
 
 export default {
@@ -278,7 +364,7 @@ export default {
       ],
       pageOne: true,
       tab: null,
-      activeDialog: false,
+      activeAddStoreShift: false,
     }
   },
   computed: {},
@@ -311,7 +397,7 @@ export default {
     },
     /** 開關新增班別視窗 */
     handleDialog() {
-      this.activeDialog = !this.activeDialog
+      this.activeAddStoreShift = !this.activeAddStoreShift
     },
     /** 新增班別 */
     addNewShift(values) {
@@ -378,4 +464,19 @@ export default {
     background-color: #fff
     box-shadow: 0px 1px 4px rgba(82, 82, 82, 0.15)
     border-radius: 5px
+    span:not:first-child
+      width: 30px
+      height: 21px
+      vertical-align: bottom
+      display: inline-flex
+      justify-content: center
+      align-items: center
+    .configuration-card
+      border: 1px solid $primary500
+      border-radius: 5px
+      padding: 0.75rem
+      >div:nth-child(2)
+        margin: 1rem 0 0
+  .icon-transparent
+    color: transparent
 </style>
