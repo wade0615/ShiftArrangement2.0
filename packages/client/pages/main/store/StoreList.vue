@@ -2,7 +2,7 @@
   <main id="stores" class="px-4 py-8" data-app>
     <section class="flex justify-between mb-3">
       <h2 @click="handleDialog">店面管理</h2>
-      <nuxt-link to="/main/store/AddStore" class="main-color">
+      <nuxt-link to="/main/store/add/AddStore" class="main-color">
         新增店面
       </nuxt-link>
     </section>
